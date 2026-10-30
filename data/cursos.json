@@ -1,8 +1,10 @@
 {
   "academy_info": {
     "name": "CyberThreat Academy",
-    "tagline": "Formación especializada en Ciberseguridad, OSINT y Threat Intelligence",
-    "version": "1.0.0"
+    "tagline": "Formación Integral en Ciberseguridad, OSINT y Cyber Threat Intelligence",
+    "version": "2.0.0",
+    "total_courses": 3,
+    "total_lessons": 26
   },
   "courses": [
     {
@@ -10,58 +12,58 @@
       "level": "Principiante",
       "badge_color": "emerald",
       "title": "Nivel 1: Fundamentos de Ciberseguridad & Huella Digital",
-      "subtitle": "De cero a comprender cómo operan las redes, los atacantes y la autoprotección digital",
-      "description": "Aprende los pilares esenciales de la seguridad de la información, el funcionamiento real de Internet, la terminal de comandos y las técnicas básicas de investigación de fuentes abiertas (OSINT) para auditar tu propia exposición.",
+      "subtitle": "De cero a dominar la arquitectura de redes, la terminal y la autoprotección digital",
+      "description": "El punto de partida obligatorio: comprende cómo viajan los datos en Internet, cómo interactuar con sistemas operativos mediante comandos, cómo los atacantes recopilan información con OSINT y qué hábitos blindan tu identidad digital.",
       "duration": "15 Horas",
       "modules_count": 4,
       "modules": [
         {
-          "id": "m1-fundamentos",
-          "title": "Módulo 1: Arquitectura de Redes y la Tríada CIA",
+          "id": "m1-redes-triada",
+          "title": "Módulo 1: Arquitectura de Redes e Internet",
           "lessons": [
             {
               "id": "l1-1-triada-redes",
-              "title": "1.1 Cómo funciona Internet y la Tríada de Seguridad",
+              "title": "1.1 Cómo funciona Internet y la Tríada CIA",
               "duration": "25 min",
-              "summary": "Aprende los principios de Confidencialidad, Integridad y Disponibilidad, y el flujo de paquetes en TCP/IP y DNS.",
-              "theory": "### 1. La Tríada CIA: El núcleo de la seguridad\nEn cualquier auditoría o incidente de seguridad, todos los controles giran en torno a tres pilares fundamentales:\n\n* **Confidencialidad (C):** La información solo es accesible por las identidades autorizadas.\n* **Integridad (I):** Los datos no pueden ser manipulados ni alterados de forma no autorizada durante su almacenamiento o tránsito.\n* **Disponibilidad (A):** Los sistemas y servicios están accesibles cuando los usuarios autorizados los necesitan.\n\n---\n\n### 2. Anatomía de una conexión a Internet\nCuando escribes `https://ejemplo.com` en tu navegador, ocurren tres pasos clave:\n1. **Resolución DNS:** Obtiene la dirección IP numérica.\n2. **Handshake TCP (Three-way Handshake):** SYN, SYN-ACK y ACK.\n3. **Cifrado TLS/SSL (HTTPS):** Negociación criptográfica para proteger los datos en tránsito.",
+              "summary": "Comprende la Confidencialidad, Integridad y Disponibilidad, y el flujo de paquetes en TCP/IP y resolución DNS.",
+              "theory": "### 1. La Tríada CIA: El núcleo de la seguridad\nEn cualquier auditoría o incidente, todos los controles giran en torno a tres pilares fundamentales:\n\n* **Confidencialidad (C):** Solo el personal autorizado accede a la información.\n* **Integridad (I):** Los datos no pueden ser alterados de forma ilícita.\n* **Disponibilidad (A):** Los servicios están operativos cuando se necesitan.\n\n---\n\n### 2. Anatomía de una conexión web\nCuando introduces `https://empresa.com`:\n1. **Resolución DNS:** Se consulta la IP numérica asociada al dominio.\n2. **Handshake TCP (Tres vías):** `SYN` -> `SYN-ACK` -> `ACK`.\n3. **Cifrado TLS/SSL (HTTPS):** Se negocian claves de cifrado asimétrico para evitar escuchas.",
               "lab": {
-                "title": "Laboratorio Práctico: Inspección de Resolución DNS y Puertos",
-                "objective": "Auditar la resolución DNS de un dominio y verificar puertos abiertos usando herramientas de consola de Windows/Linux.",
-                "prerequisites": "Terminal PowerShell (Windows) o Bash (Linux). Sin necesidad de privilegios de administrador.",
+                "title": "Laboratorio: Auditoría de Resolución DNS y Puertos",
+                "objective": "Auditar la resolución DNS y comprobar puertos TCP abiertos con herramientas estándar de consola.",
+                "prerequisites": "PowerShell o Bash.",
                 "steps": [
                   {
                     "step": 1,
-                    "instruction": "Consultar los registros DNS y servidores de correo de un dominio objetivo.",
+                    "instruction": "Consultar registros DNS y servidores MX de un dominio.",
                     "command": "nslookup -type=any cloudflare.com",
-                    "explanation": "nslookup interroga a tu servidor DNS local para obtener direcciones IPv4 (A), IPv6 (AAAA) y servidores de correo (MX)."
+                    "explanation": "Interroga al servidor DNS local para obtener direcciones IPv4, IPv6 y servidores de correo."
                   },
                   {
                     "step": 2,
-                    "instruction": "Trazar la ruta de saltos de red hasta el servidor de destino.",
+                    "instruction": "Trazar los saltos de red hacia el servidor de destino.",
                     "command": "tracert 1.1.1.1",
-                    "explanation": "Identifica cada router intermedio por el que pasan tus paquetes antes de llegar al destino."
+                    "explanation": "Identifica cada router intermedio por el que pasan los paquetes."
                   },
                   {
                     "step": 3,
                     "instruction": "Verificar si el puerto HTTPS (443) responde en un servidor remoto.",
                     "command": "Test-NetConnection -ComputerName google.com -Port 443",
-                    "explanation": "Comprueba el Three-Way Handshake TCP sin necesidad de instalar clientes pesados."
+                    "explanation": "Valida la conexión TCP a nivel de socket sin herramientas externas."
                   }
                 ],
-                "deliverable": "Captura de pantalla o registro del resultado de Test-NetConnection con 'TcpTestSucceeded : True'."
+                "deliverable": "Captura del comando Test-NetConnection con TcpTestSucceeded: True."
               },
               "terminal_sim": {
-                "initial_text": "CyberLab v1.0 [Simulador de Red]\nEscribe 'help' o prueba los comandos del laboratorio (nslookup, test-port, traceroute)",
+                "initial_text": "CyberLab Redes v1.0\nPrueba comandos: 'nslookup', 'test-port', 'traceroute'",
                 "commands": {
-                  "nslookup": "Servidor: 1.1.1.1\nAddress: 1.1.1.1#53\nRespuesta no autoritativa:\ncloudflare.com internet address = 104.16.132.229\ncloudflare.com mail exchanger = 10 aspmx.l.google.com.",
+                  "nslookup": "Servidor: 1.1.1.1\nAddress: 1.1.1.1#53\ncloudflare.com internet address = 104.16.132.229\ncloudflare.com mail exchanger = 10 aspmx.l.google.com.",
                   "test-port": "Conectando con google.com:443 [TCP]...\n[+] Handshake SYN completado con éxito.\n[+] TcpTestSucceeded: TRUE - Canal seguro abierto.",
                   "traceroute": "1  192.168.1.1 (Gateway Local) 1.2ms\n2  10.20.0.1 (ISP Core) 8.4ms\n3  1.1.1.1 (Cloudflare Edge) 12.1ms\n[+] Traza completada exitosamente."
                 }
               },
               "quiz": [
                 {
-                  "question": "¿Cuál de los tres pilares de la tríada CIA se ve vulnerado directamente durante un ataque de denegación de servicio (DDoS)?",
+                  "question": "¿Cuál de los tres pilares de la tríada CIA se vulnera en un ataque DDoS?",
                   "options": [
                     "Confidencialidad",
                     "Integridad",
@@ -69,101 +71,405 @@
                     "Autenticidad"
                   ],
                   "correctIndex": 2,
-                  "explanation": "Un ataque DDoS satura intencionadamente los recursos del servidor para impedir que los usuarios legítimos puedan acceder, afectando la Disponibilidad (Availability)."
-                },
-                {
-                  "question": "¿Qué paquete envía el servidor en el segundo paso del Three-Way Handshake de TCP?",
-                  "options": [
-                    "SYN",
-                    "SYN-ACK",
-                    "FIN-ACK",
-                    "RST"
-                  ],
-                  "correctIndex": 1,
-                  "explanation": "El servidor responde al cliente con un SYN-ACK confirmando la recepción del SYN inicial y solicitando su propia sincronización."
+                  "explanation": "Un ataque DDoS satura recursos para impedir el acceso legítimo, afectando la Disponibilidad."
                 }
               ],
               "video_script": {
-                "title": "Guion de Vídeo: Cómo funciona Internet y la Tríada CIA",
-                "target_duration": "3 - 5 Minutos",
+                "title": "Guion: Cómo funciona Internet y la Tríada CIA",
+                "target_duration": "4 Minutos",
                 "scenes": [
                   {
-                    "time": "00:00 - 00:30",
-                    "visual": "Animación de un candado digital y un gráfico de la Tríada CIA (Confidencialidad, Integridad, Disponibilidad).",
-                    "audio": "¿Alguna vez te has preguntado qué ocurre en el segundo exacto en que entras a tu banco o envías un mensaje privado? En este vídeo aprenderás los tres pilares inviolables de la ciberseguridad y cómo viajan tus datos por la red sin ser interceptados."
+                    "time": "00:00 - 00:45",
+                    "visual": "Animación de un candado digital y los tres pilares de la Tríada CIA.",
+                    "audio": "¿Qué ocurre en el milisegundo exacto en que entras a tu banco o compras online? Hoy aprenderás los tres pilares de la ciberseguridad."
                   },
                   {
-                    "time": "00:30 - 02:00",
-                    "visual": "Diagrama de flujo animado: Navegador -> Servidor DNS -> Handshake TCP -> Túnel HTTPS.",
-                    "audio": "Para entender cómo defenderte, primero debes comprender el camino que recorre un paquete. Cuando pides una web, tu ordenador no conoce nombres, solo números IP. El servidor DNS actúa como la libreta de contactos. Inmediatamente después, se realiza un saludo de 3 pasos: el famoso Handshake TCP. Si este canal no estuviese cifrado con TLS, cualquier persona conectada a tu misma red Wi-Fi podría leer tus contraseñas en texto plano."
-                  },
-                  {
-                    "time": "02:00 - 03:00",
-                    "visual": "Terminal ejecutando nslookup y Test-NetConnection con los resultados del laboratorio práctico.",
-                    "audio": "Abre tu propia terminal y compruébalo tú mismo con el comando nslookup. En la siguiente clase, nos pondremos manos a la obra con Linux y los permisos de usuario."
+                    "time": "00:45 - 02:30",
+                    "visual": "Diagrama de flujo animado de resolución DNS y Three-way Handshake.",
+                    "audio": "Tu ordenador no entiende nombres, solo números IP. El DNS traduce la dirección y TCP establece un canal fiable."
                   }
                 ]
               }
             },
             {
-              "id": "l1-2-osint-basico",
-              "title": "1.2 OSINT Básico: Huella Digital y Google Dorks",
+              "id": "l1-2-puertos-cifrado",
+              "title": "1.2 Puertos, Protocolos y Cifrado (HTTP vs HTTPS)",
               "duration": "30 min",
-              "summary": "Aprende qué es la inteligencia de fuentes abiertas (OSINT) y cómo utilizar operadores avanzados de búsqueda para descubrir fugas de información.",
-              "theory": "### 1. ¿Qué es OSINT?\n**OSINT (Open Source Intelligence)** es la disciplina de recopilar, correlacionar y analizar información públicamente accesible para generar inteligencia útil y procesable.\n\nLos atacantes utilizan OSINT durante la fase de **Reconocimiento Pasivo**: obtienen datos de la víctima sin enviar un solo paquete directo a sus servidores, haciendo que la investigación sea completamente indetectable.\n\n---\n\n### 2. Google Dorking (Búsqueda Avanzada)\nOperadores comunes:\n* `site:` Limita al dominio objetivo.\n* `filetype:` Filtra extensiones específicas (ej. pdf, doc, env).\n* `intitle:` Busca términos exactos en el título web.\n* `intext:` Filtra cadenas dentro del contenido.",
+              "summary": "Descubre los puertos estándar de red y la diferencia crítica entre tráfico en texto plano y tráfico cifrado con TLS.",
+              "theory": "### 1. Puertos comunes de red\nCada servicio en un servidor escucha en un puerto numérico estandarizado (0 al 65535):\n\n* **Puerto 80 (HTTP):** Tráfico web en texto plano (vulnerable a interceptación).\n* **Puerto 443 (HTTPS):** Tráfico web cifrado con TLS.\n* **Puerto 22 (SSH):** Gestión remota cifrada de servidores Linux.\n* **Puerto 53 (DNS):** Resolución de nombres de dominio.\n\n---\n\n### 2. Man-in-the-Middle y Cifrado TLS\nSi navegas por HTTP plano en una red pública, un atacante mediante **ARP Spoofing** puede interceptar tus credenciales con Wireshark sin esfuerzo. El cifrado TLS garantiza confidencialidad e integridad punto a punto.",
               "lab": {
-                "title": "Laboratorio Práctico: Auditoría de Exposición Personal y Dorking Seguro",
-                "objective": "Aprender a buscar filtraciones de credenciales y documentos expuestos en entornos de prueba autorizados.",
-                "prerequisites": "Navegador web moderno.",
+                "title": "Laboratorio: Detección de Puertos Locales en Escucha",
+                "objective": "Identificar qué puertos y servicios están abiertos en tu propia máquina.",
+                "prerequisites": "PowerShell o CMD.",
                 "steps": [
                   {
                     "step": 1,
-                    "instruction": "Comprobar si tu correo personal ha figurado en brechas de datos masivas.",
-                    "command": "Visitar https://haveibeenpwned.com e introducir un correo de prueba.",
-                    "explanation": "HaveIBeenPwned indexa miles de millones de cuentas comprometidas en filtraciones públicas de grandes servicios."
-                  },
-                  {
-                    "step": 2,
-                    "instruction": "Buscar archivos PDF expuestos en dominios educativos autorizados usando Google Dorks.",
-                    "command": "site:edu.es filetype:pdf \"ciberseguridad\"",
-                    "explanation": "Demuestra cómo filtrar documentación técnica pública de forma precisa y eficiente."
+                    "instruction": "Listar todos los puertos locales en escucha activa y sus procesos asociados.",
+                    "command": "netstat -ano | findstr LISTENING",
+                    "explanation": "Muestra los sockets locales abiertos y el PID del proceso responsable."
                   }
                 ],
-                "deliverable": "Un informe de 3 puntos resumiendo tu nivel de exposición digital detectado."
+                "deliverable": "Listado de los puertos locales en estado LISTENING identificados."
               },
               "terminal_sim": {
-                "initial_text": "CyberLab OSINT Console\nEscribe 'dork-test' o 'check-breach' para probar simulaciones.",
+                "initial_text": "Network Sockets Analyzer\nPrueba el comando: 'netstat-listen'",
                 "commands": {
-                  "dork-test": "[+] Ejecutando consulta simulada: site:target.com filetype:pdf 'confidential'\n[RESULTADO]:\n1. target.com/docs/annual_report_2025.pdf [200 OK]\n2. target.com/backup/policy_internal.pdf [200 OK]\n[!] Alerta: Se han detectado 2 documentos indexados en el buscador.",
-                  "check-breach": "[+] Consultando base de datos de filtraciones simulada...\n[INFO]: usuario@ejemplo.com localizado en 2 brechas antiguas (2021 DataBreach, 2023 ComboList).\n[RECOMENDACIÓN]: Habilitar MFA FIDO2 y rotar claves maestras."
+                  "netstat-listen": "TCP    0.0.0.0:80        0.0.0.0:0              LISTENING       412\nTCP    0.0.0.0:443       0.0.0.0:0              LISTENING       412\nTCP    0.0.0.0:3389      0.0.0.0:0              LISTENING       980\n[+] 3 puertos en escucha detectados."
                 }
               },
               "quiz": [
                 {
-                  "question": "¿Cuál es la principal característica del reconocimiento pasivo en OSINT?",
+                  "question": "¿Qué puerto estándar utiliza el protocolo seguro HTTPS?",
                   "options": [
-                    "Requiere infectar el equipo de la víctima con malware",
-                    "No interactúa directamente con los servidores de la víctima, por lo que no deja registros en sus firewalls",
-                    "Siempre utiliza ataques de fuerza bruta",
-                    "Es visible de inmediato para el equipo de Blue Team"
+                    "Puerto 80",
+                    "Puerto 21",
+                    "Puerto 443",
+                    "Puerto 8080"
                   ],
-                  "correctIndex": 1,
-                  "explanation": "El reconocimiento pasivo consulta fuentes intermedias (motores de búsqueda, registros públicos de DNS, cachés) sin enviar paquetes directos a los sistemas del objetivo."
+                  "correctIndex": 2,
+                  "explanation": "El puerto 443 es el estándar universal reservado para HTTPS con cifrado TLS/SSL."
                 }
               ],
               "video_script": {
-                "title": "Guion de Vídeo: Cómo descubren tus datos con OSINT y Google Dorks",
+                "title": "Guion: Puertos de Red y Cifrado TLS",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Comparación visual de un paquete HTTP (letras legibles) frente a HTTPS (cifrado ilegible).",
+                    "audio": "¿Te conectarías a la Wi-Fi de una cafetería para ver tu cuenta bancaria? Si la web no usa HTTPS, cualquiera puede leer tu contraseña."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m2-sistemas-terminal",
+          "title": "Módulo 2: Sistemas Operativos & Línea de Comandos",
+          "lessons": [
+            {
+              "id": "l1-3-linux-basico",
+              "title": "1.3 Linux para Ciberseguridad: Comandos Esenciales y Permisos",
+              "duration": "40 min",
+              "summary": "Aprende a moverte por la consola de Linux, gestionar archivos y entender el sistema de permisos rwx y sudo.",
+              "theory": "### 1. ¿Por qué Linux es el estándar en Ciberseguridad?\nLa inmensa mayoría de servidores mundiales y herramientas de seguridad (Kali Linux, Parrot OS) operan sobre distribuciones basadas en Linux.\n\n### 2. Estructura de Permisos (`rwx`)\nCada archivo en Linux tiene permisos para tres entidades: **Usuario (u)**, **Grupo (g)** y **Otros (o)**.\n* `r` (Lectura = 4)\n* `w` (Escritura = 2)\n* `x` (Ejecución = 1)\n\nUn archivo con `chmod 755` otorga control total al creador y lectura/ejecución al resto.",
+              "lab": {
+                "title": "Laboratorio: Gestión de Archivos y Permisos en Terminal Linux",
+                "objective": "Crear un script de seguridad, modificar sus permisos y ejecutarlo con permisos controlados.",
+                "prerequisites": "Bash o terminal Linux/WSL.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Crear un directorio de trabajo y navegar a él.",
+                    "command": "mkdir -p ~/cyber_lab && cd ~/cyber_lab",
+                    "explanation": "Crea una carpeta aislada para prácticas."
+                  },
+                  {
+                    "step": 2,
+                    "instruction": "Crear un script y otorgarle permisos de ejecución exclusivos.",
+                    "command": "echo 'echo \"Auditoría completada\"' > check.sh && chmod 700 check.sh",
+                    "explanation": "Asigna permisos rwx solo al propietario (7) y ninguno a terceros (00)."
+                  }
+                ],
+                "deliverable": "Salida del comando `ls -la check.sh` mostrando permisos `-rwx------`."
+              },
+              "terminal_sim": {
+                "initial_text": "Ubuntu Bash Simulator\nPrueba: 'ls-perm' o 'run-script'",
+                "commands": {
+                  "ls-perm": "-rwx------ 1 student student 42 Oct 30 12:00 check.sh\n[+] Permisos verificados: Solo el usuario propietario tiene lectura, escritura y ejecución.",
+                  "run-script": "[+] Ejecutando ./check.sh...\nAuditoría completada.\n[+] Proceso finalizado con código de salida 0."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué valor numérico de permisos otorga lectura y ejecución pero NO escritura?",
+                  "options": [
+                    "7",
+                    "6",
+                    "5",
+                    "4"
+                  ],
+                  "correctIndex": 2,
+                  "explanation": "Lectura (4) + Ejecución (1) = 5."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Linux Básico y Permisos para Hackers",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Pantalla de Kali Linux ejecutando comandos en consola.",
+                    "audio": "Si quieres dedicarte a la ciberseguridad, la terminal de Linux no es una opción, es tu herramienta diaria."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l1-4-windows-internals",
+              "title": "1.4 Windows Internals & PowerShell para Seguridad",
+              "duration": "35 min",
+              "summary": "Aprende cómo auditar procesos en Windows, consultar el Registro y utilizar PowerShell para inspeccionar el sistema.",
+              "theory": "### 1. El corazón de Windows\nEn entornos corporativos, Active Directory y estaciones Windows dominan el 85% de los puestos de trabajo. Comprender procesos (`svchost.exe`, `lsass.exe`), servicios y el Registro (`regedit`) es vital tanto para auditar como para responder ante malware.\n\n### 2. PowerShell como herramienta de auditoría\nPowerShell permite obtener telemetría directa del sistema mediante cmdlets como `Get-Process`, `Get-Service` y `Get-WinEvent`.",
+              "lab": {
+                "title": "Laboratorio: Inspección de Procesos y Servicios en PowerShell",
+                "objective": "Identificar procesos sospechosos o con alto consumo de recursos usando PowerShell.",
+                "prerequisites": "PowerShell en Windows.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Listar los 5 procesos que más memoria RAM consumen.",
+                    "command": "Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 5 Name, Id, WorkingSet64",
+                    "explanation": "Permite detectar anomalías o procesos devoradores de recursos."
+                  }
+                ],
+                "deliverable": "Captura con la lista de los 5 procesos principales."
+              },
+              "terminal_sim": {
+                "initial_text": "PowerShell Security Terminal\nPrueba: 'audit-processes'",
+                "commands": {
+                  "audit-processes": "Name           Id WorkingSet64\n----           -- ------------\nmsedge       8292    419430400\nexplorer     2104    184549376\nsvchost      1432    125829120\n[+] Telemetría de procesos recolectada con éxito."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué comando de PowerShell lista los procesos en ejecución?",
+                  "options": [
+                    "ls -p",
+                    "Get-Process",
+                    "Show-Tasks",
+                    "ps -aux"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "Get-Process es el cmdlet nativo de PowerShell para consultar los procesos activos."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Windows Internals y Auditoría con PowerShell",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Consola PowerShell azul ejecutando cmdlets de auditoría.",
+                    "audio": "Aprende a ver exactamente qué ocurre dentro de tu sistema operativo Windows usando PowerShell."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m3-huella-osint",
+          "title": "Módulo 3: Huella Digital, Privacidad & OSINT Básico",
+          "lessons": [
+            {
+              "id": "l1-5-osint-dorking",
+              "title": "1.5 OSINT Básico: Huella Digital y Google Dorks",
+              "duration": "30 min",
+              "summary": "Aprende la metodología de recopilación de inteligencia de fuentes abiertas y técnicas de búsqueda avanzada.",
+              "theory": "### 1. ¿Qué es OSINT?\n**OSINT (Open Source Intelligence)** es la obtención y análisis de información accesible públicamente. Los atacantes la usan en la fase de reconocimiento pasivo sin enviar tráfico directo al objetivo.\n\n### 2. Operadores de Google Dorking\n* `site:empresa.com`: Filtra resultados a un dominio.\n* `filetype:pdf` / `filetype:env`: Busca extensiones sensibles.\n* `intitle:\"index of /\"`: Localiza directorios web abiertos.",
+              "lab": {
+                "title": "Laboratorio: Detección de Fugas en Fuentes Abiertas",
+                "objective": "Auditar la exposición de correos y documentos corporativos indexados.",
+                "prerequisites": "Navegador web.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Comprobar cuentas comprometidas en filtraciones históricas.",
+                    "command": "Consultar https://haveibeenpwned.com",
+                    "explanation": "Comprueba brechas de datos masivas indexadas en la red."
+                  }
+                ],
+                "deliverable": "Informe de nivel de exposición personal."
+              },
+              "terminal_sim": {
+                "initial_text": "OSINT Console\nPrueba: 'dork-test' o 'check-breach'",
+                "commands": {
+                  "dork-test": "[+] Ejecutando consulta: site:target.com filetype:pdf confidential\n[RESULTADO]: 2 documentos indexados en el buscador.",
+                  "check-breach": "[INFO]: Correo localizado en 2 filtraciones pasadas. Se recomienda rotar claves y activar MFA."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué operador de Google filtra archivos por su extensión?",
+                  "options": [
+                    "ext:",
+                    "filetype:",
+                    "type:",
+                    "format:"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "El operador estándar de Google para extensiones es filetype:."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Google Dorks y Fugas de Información",
                 "target_duration": "3 Minutos",
                 "scenes": [
                   {
-                    "time": "00:00 - 00:40",
-                    "visual": "Pantalla negra con código verde y titulares reales de filtraciones de datos.",
-                    "audio": "¿Sabías que los ciberdelincuentes no necesitan hackear una empresa para obtener sus contraseñas? A menudo, los propios administradores las dejan expuestas en Internet por error. Hoy aprenderás cómo funciona el OSINT y los famosos Google Dorks."
-                  },
+                    "time": "00:00 - 00:45",
+                    "visual": "Demostración de búsquedas con Google Dorks encontrando archivos indexados.",
+                    "audio": "¿Sabías que muchas contraseñas están a la vista de todos en Google? Hoy aprenderás cómo evitar regalar tus datos."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l1-6-higiene-passwords",
+              "title": "1.6 Higiene Digital, MFA y Gestión de Contraseñas",
+              "duration": "30 min",
+              "summary": "Implementa una estrategia sólida de defensa personal: gestores de contraseñas, Passkeys y autenticación robusta.",
+              "theory": "### 1. El mito de la contraseña compleja cambiada cada mes\nNIST desaconseja obligar a cambiar contraseñas frecuentemente porque los usuarios terminan usando patrones predecibles (ej. `Primavera2026!`). La recomendación actual es: **frases largas (passphrases) gestionadas por un gestor de claves** y protegidas por **MFA**.\n\n### 2. Factores de autenticación\n* Algo que sabes (contraseña).\n* Algo que tienes (teléfono móvil, llave YubiKey).\n* Algo que eres (huella dactilar, biometría facial).",
+              "lab": {
+                "title": "Laboratorio: Configuración de Gestor de Claves y Llaves de Paso (Passkeys)",
+                "objective": "Configurar una clave segura generada aleatoriamente y habilitar autenticación multifactor.",
+                "prerequisites": "Navegador web y aplicación autenticadora.",
+                "steps": [
                   {
-                    "time": "00:40 - 02:00",
-                    "visual": "Demostración de los operadores site: y filetype: en la barra de búsqueda de Google.",
-                    "audio": "Google es mucho más que un buscador. Con comandos como 'filetype:pdf' o 'site:', puedes filtrar información con precisión quirúrgica. Veremos cómo auditar si tu propia organización está regalando datos confidenciales sin saberlo."
+                    "step": 1,
+                    "instruction": "Generar una clave de 20 caracteres con entropía alta.",
+                    "command": "openssl rand -base64 20",
+                    "explanation": "Genera contraseñas criptográficamente aleatorias imposibles de adivinar por diccionario."
+                  }
+                ],
+                "deliverable": "Verificación de MFA activo en una cuenta de prueba."
+              },
+              "terminal_sim": {
+                "initial_text": "Pass Generator CLI\nPrueba: 'generate-pass'",
+                "commands": {
+                  "generate-pass": "Clave generada: wK8#mQ9!zL2$vB5@pX9\nEntropía: 128 bits\nTiempo estimado para descifrar por fuerza bruta: 4.800 millones de años."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál de los siguientes métodos de autenticación es resistente al phishing?",
+                  "options": [
+                    "SMS",
+                    "Correo electrónico",
+                    "Preguntas de seguridad",
+                    "Llave física FIDO2 / Passkey"
+                  ],
+                  "correctIndex": 3,
+                  "explanation": "FIDO2 y las Passkeys vinculan el token al dominio exacto, haciendo imposible que un atacante lo robe en un sitio falso."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: La Muerte de las Contraseñas y el Futuro de las Passkeys",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Comparación entre una contraseña débil y una llave criptográfica FIDO2.",
+                    "audio": "El 80% de las brechas de seguridad ocurren por contraseñas robadas o reutilizadas. Es hora de cambiar la forma en que te autenticas."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m4-amenazas-cotidianas",
+          "title": "Módulo 4: Amenazas Cotidianas y Vectores de Ataque",
+          "lessons": [
+            {
+              "id": "l1-7-malware-tipos",
+              "title": "1.7 Taxonomía del Malware: Virus, Troyanos y Ransomware",
+              "duration": "35 min",
+              "summary": "Conoce los diferentes tipos de software malicioso, sus mecanismos de infección y su impacto.",
+              "theory": "### 1. Tipos de Malware\n* **Virus:** Código que se autoreplica infectando otros ejecutables.\n* **Troyano:** Programa aparentemente legítimo que oculta una carga dañina.\n* **Ransomware:** Cifra los archivos del equipo y exige un rescate en criptomonedas.\n* **Spyware & InfoStealers:** Extraen silenciosamente credenciales y sesiones web.",
+              "lab": {
+                "title": "Laboratorio: Análisis de Hashes de Ficheros en VirusTotal",
+                "objective": "Calcular el hash SHA-256 de un fichero y comprobar su reputación en bases de datos mundiales.",
+                "prerequisites": "PowerShell o terminal Linux.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Calcular el hash SHA256 de un archivo en Windows.",
+                    "command": "Get-FileHash -Algorithm SHA256 C:\\Windows\\System32\\calc.exe",
+                    "explanation": "El hash es la huella dactilar única e irrepetible del archivo."
+                  }
+                ],
+                "deliverable": "Hash SHA256 obtenido y verificado."
+              },
+              "terminal_sim": {
+                "initial_text": "Hash Scanner v1.0\nPrueba: 'check-hash calc.exe'",
+                "commands": {
+                  "check-hash calc.exe": "Algorithm: SHA256\nHash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n[VirusTotal Check]: 0/72 detecciones (Fichero Oficial Limpio)."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué tipo de malware tiene como objetivo principal cifrar archivos para extorsionar a la víctima?",
+                  "options": [
+                    "Adware",
+                    "Ransomware",
+                    "Keylogger",
+                    "Worm"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "El Ransomware cifra los datos del sistema para exigir un pago económico."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Anatomía del Ransomware y el Malware Moderno",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Pantalla de bloqueo típica de un ataque de ransomware.",
+                    "audio": "En cuestión de segundos, todos tus archivos quedan bloqueados bajo un cifrado de grado militar. Así opera el ransomware."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l1-8-ingenieria-social",
+              "title": "1.8 Ingeniería Social: Phishing, Smishing y Vishing",
+              "duration": "35 min",
+              "summary": "Descubre las tácticas psicológicas que utilizan los ciberdelincuentes para engañar al eslabón humano.",
+              "theory": "### 1. El factor humano en la seguridad\nKevin Mitnick popularizó la frase: *\"Es más fácil engañar a una persona para que te dé su contraseña que hackear un servidor con cifrado de 256 bits\"*.\n\n### 2. Variantes de Ingeniería Social\n* **Phishing:** Correo fraudulento suplantando una entidad de confianza.\n* **Smishing:** Mensajes SMS falsos (paquetes retenidos, cargos bancarios).\n* **Vishing:** Llamadas telefónicas suplantando soporte técnico.",
+              "lab": {
+                "title": "Laboratorio: Análisis de Cabeceras de Correo Sospechoso",
+                "objective": "Inspeccionar los registros SPF, DKIM y DMARC en la cabecera de un correo electrónico.",
+                "prerequisites": "Cliente de correo web o de escritorio.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Abrir el correo original y ver el código fuente/cabeceras.",
+                    "command": "Buscar campos 'Received-SPF' y 'Authentication-Results'",
+                    "explanation": "Valida si el servidor remitente tenía permiso para enviar en nombre del dominio."
+                  }
+                ],
+                "deliverable": "Identificación del resultado SPF (Pass o Fail) del correo analizado."
+              },
+              "terminal_sim": {
+                "initial_text": "Email Header Inspector\nPrueba: 'analyze-email phishing.eml'",
+                "commands": {
+                  "analyze-email phishing.eml": "From: soporte@banco-seguro-alerta.com\nSPF Check: FAIL (Servidor no autorizado)\nDKIM: NONE\nDMARC: REJECT\n[ALERTA SOC]: Suplantación de identidad detectada con 99.8% de certeza."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué protocolo valida si el servidor que envía un correo está autorizado por el dueño del dominio?",
+                  "options": [
+                    "SPF",
+                    "FTP",
+                    "SNMP",
+                    "BGP"
+                  ],
+                  "correctIndex": 0,
+                  "explanation": "SPF (Sender Policy Framework) especifica en el DNS qué servidores IP pueden enviar correos en nombre del dominio."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Cómo Detectar un Phishing en 10 Segundos",
+                "target_duration": "3 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 00:45",
+                    "visual": "Comparación lado a lado de un correo falso y uno legítimo.",
+                    "audio": "¿Urgencia extrema? ¿Un enlace sospechoso? Aprende a identificar las señales invisibles de un correo malicioso."
                   }
                 ]
               }
@@ -176,138 +482,546 @@
       "id": "curso-intermedio",
       "level": "Intermedio",
       "badge_color": "amber",
-      "title": "Nivel 2: Hacking Ético, OSINT & Detección de Amenazas",
+      "title": "Nivel 2: Hacking Ético, OSINT Ofensivo & Detección",
       "subtitle": "Metodologías de intrusión ética, escaneo de superficies, phishing avanzado y vectores de malware",
-      "description": "Da el salto práctico: aprende a utilizar herramientas de auditoría ofensiva como Nmap y Shodan, comprende cómo operan los ataques de Adversary-in-the-Middle (Evilginx) y cómo los equipos de defensa detectan y bloquean intrusiones.",
+      "description": "Da el salto práctico: domina herramientas de auditoría ofensiva como Nmap y Shodan, comprende cómo operan los ataques AitM (Evilginx), analiza el tráfico de malware en sandboxes y aprende a desplegar defensas activas y bastionado.",
       "duration": "25 Horas",
       "modules_count": 5,
       "modules": [
         {
-          "id": "m2-recon-ofensivo",
-          "title": "Módulo 1: Escaneo de Superficie y Ataques de Credenciales",
+          "id": "m2-1-escaneo-ofensivo",
+          "title": "Módulo 1: Escaneo de Superficie y Reconocimiento",
           "lessons": [
             {
               "id": "l2-1-shodan-nmap",
               "title": "2.1 Reconocimiento de Superficie con Shodan y Nmap",
               "duration": "40 min",
-              "summary": "Aprende la diferencia entre reconocimiento activo y pasivo a escala global, escaneo de banners y detección de servicios vulnerables.",
-              "theory": "### 1. Shodan: El motor de búsqueda de dispositivos conectados\nShodan rastrea toda la dirección IPv4 global conectándose a puertos abiertos e indexando los banners de servicio (cabeceras SSH, servidores web, cámaras IP, SCADA).\n\nFiltros clave:\n* `port:3389` (RDP expuesto).\n* `org:\"NombreEntidad\"` (Rango de IPs de una entidad).\n* `product:\"Apache httpd\"` (Software específico).\n\n---\n\n### 2. Nmap: Escaneo Activo\nPermite auditar puertos con técnicas como SYN Stealth Scan (`-sS`), detección de versiones (`-sV`) y scripts NSE (`-sC`).",
+              "summary": "Aprende a mapear infraestructura expuesta mediante Shodan y a ejecutar escaneos activos de puertos con Nmap.",
+              "theory": "### 1. Shodan y Censys\nShodan indexa banners de dispositivos conectados a Internet sin enviar paquetes en tiempo real desde tu IP.\n\n### 2. Nmap: Auditoría Activa\n* `-sS`: SYN Stealth Scan.\n* `-sV`: Identificación de versiones de software.\n* `-sC`: Ejecución de scripts NSE.",
               "lab": {
-                "title": "Laboratorio Práctico: Auditoría de Red Local con Nmap en Entorno Controlado",
-                "objective": "Escanear una máquina virtual local y generar un informe de puertos y servicios expuestos.",
-                "prerequisites": "Kali Linux o máquina con Nmap instalado en red host-only.",
+                "title": "Laboratorio: Escaneo Controlado con Nmap",
+                "objective": "Escanear una máquina local e identificar versiones de software expuestas.",
+                "prerequisites": "Nmap instalado en Kali Linux o Windows.",
                 "steps": [
                   {
                     "step": 1,
-                    "instruction": "Descubrir equipos activos en el segmento local sin hacer ruido.",
-                    "command": "nmap -sn 192.168.56.0/24",
-                    "explanation": "Realiza un barrido Ping (ICMP + ARP en local) para listar IPs encendidas."
-                  },
-                  {
-                    "step": 2,
-                    "instruction": "Escanear los 100 puertos más comunes de la máquina objetivo.",
-                    "command": "nmap -F -sV 192.168.56.101",
-                    "explanation": "Descubre rápidamente si tiene puertos como 22 (SSH), 80 (HTTP) o 445 (SMB) con sus versiones."
+                    "instruction": "Escanear puertos comunes y deducir el sistema operativo.",
+                    "command": "nmap -sV -sC -F 192.168.56.101",
+                    "explanation": "Ejecuta detección rápida de servicios y scripts por defecto."
                   }
                 ],
-                "deliverable": "Listado de puertos abiertos identificados con sus versiones de servicio y evaluación de riesgos."
+                "deliverable": "Listado de puertos abiertos identificados con sus versiones."
               },
               "terminal_sim": {
-                "initial_text": "CyberLab Kali Terminal [Nmap v7.94]\nPrueba: 'nmap -sn 10.0.0.0/24' o 'nmap -sV 10.0.0.15'",
+                "initial_text": "Nmap Console\nPrueba: 'nmap-scan 10.0.0.15'",
                 "commands": {
-                  "nmap -sn 10.0.0.0/24": "Starting Nmap 7.94\nNmap scan report for 10.0.0.1 (Gateway)\nHost is up (0.0012s latency).\nNmap scan report for 10.0.0.15 (Target-Server)\nHost is up (0.0008s latency).\n2 hosts up scanned in 1.45 seconds.",
-                  "nmap -sV 10.0.0.15": "PORT     STATE SERVICE VERSION\n22/tcp   open  ssh     OpenSSH 8.9p1 Ubuntu\n80/tcp   open  http    Apache httpd 2.4.52\n3306/tcp open  mysql   MySQL 8.0.35\nService Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel"
+                  "nmap-scan 10.0.0.15": "PORT     STATE SERVICE VERSION\n22/tcp   open  ssh     OpenSSH 8.9p1\n80/tcp   open  http    Apache httpd 2.4.52\n3306/tcp open  mysql   MySQL 8.0.35"
                 }
               },
               "quiz": [
                 {
-                  "question": "¿Por qué el escaneo SYN (-sS) en Nmap se conoce popularmente como 'half-open scan'?",
+                  "question": "¿Por qué el escaneo -sS en Nmap no completa la conexión TCP?",
                   "options": [
-                    "Porque solo escanea la mitad de los puertos disponibles",
-                    "Porque nunca completa el 3-way handshake de TCP: envía un paquete RST tan pronto recibe el SYN-ACK",
-                    "Porque únicamente funciona sobre el protocolo UDP",
-                    "Porque solo puede ser ejecutado por usuarios sin privilegios"
+                    "Usa UDP",
+                    "Envía un paquete RST al recibir SYN-ACK",
+                    "Solo envía paquetes ICMP",
+                    "Bloquea el puerto"
                   ],
                   "correctIndex": 1,
-                  "explanation": "Al enviar un paquete RST inmediatamente tras recibir el SYN-ACK, la conexión TCP nunca se finaliza formalmente en la capa de aplicación."
+                  "explanation": "Al enviar un RST tras el SYN-ACK, la conexión nunca se finaliza formalmente en la capa de aplicación."
                 }
               ],
               "video_script": {
-                "title": "Guion de Vídeo: Cómo los Hackers Descubren Servidores Expuestos con Shodan y Nmap",
+                "title": "Guion: Escaneo de Redes con Shodan y Nmap",
                 "target_duration": "4 Minutos",
                 "scenes": [
                   {
-                    "time": "00:00 - 00:45",
-                    "visual": "Mapa mundial con puntos rojos parpadeantes representando puertos abiertos en Shodan.",
-                    "audio": "Imagina un radar que escanea cada segundo todos los dispositivos conectados al planeta: desde cámaras de seguridad hasta servidores de bases de datos. Eso es Shodan. En este vídeo aprenderás cómo los atacantes mapean objetivos en segundos y cómo utilizar Nmap para auditar tus defensas."
-                  },
-                  {
-                    "time": "00:45 - 02:30",
-                    "visual": "Ejecución de Nmap en consola mostrando la detección de servicios y versiones vulnerables.",
-                    "audio": "Cuando ejecutamos un escaneo de puertos con detección de versiones, no estamos buscando 'hacer daño', sino auditar qué puertas y ventanas hemos dejado abiertas al exterior."
+                    "time": "00:00 - 01:00",
+                    "visual": "Mapa mundial de Shodan con dispositivos expuestos.",
+                    "audio": "En este vídeo aprenderás cómo los atacantes mapean objetivos en segundos usando Shodan y Nmap."
                   }
                 ]
               }
             },
             {
-              "id": "l2-2-phishing-aitm",
-              "title": "2.2 Phishing Moderno: AitM y Evasión de MFA (Evilginx)",
-              "duration": "45 min",
-              "summary": "Comprende cómo los proxies inversos interceptan tokens de sesión y cómo defender a la organización mediante claves de seguridad FIDO2.",
-              "theory": "### 1. La muerte del Phishing tradicional\nEl phishing clásico basado en clonar una web ya no funciona ante el MFA (códigos OTP o Push).\n\n### 2. Ataques Adversary-in-the-Middle (AitM)\nHerramientas como **Evilginx** actúan como un Reverse Proxy intermedio en tiempo real entre la víctima y el servicio legítimo (M365, Google, GitHub). Cuando el usuario completa el MFA, el servidor legítimo genera la **cookie de sesión**, la cual es interceptada por el proxy atacante.",
+              "id": "l2-2-enumeracion-web",
+              "title": "2.2 Enumeración Web y Descubrimiento de Contenidos (Gobuster)",
+              "duration": "40 min",
+              "summary": "Descubre rutas ocultas, paneles de administración y ficheros sensibles en servidores web con herramientas de fuzzing.",
+              "theory": "### 1. Fuzzing y Enumeración Web\nLos desarrolladores frecuentemente dejan directorios como `/admin/`, `/backup/` o `/.git/` accesibles pero no enlazados en el menú de la web. Herramientas como **Gobuster** o **ffuf** realizan peticiones HTTP sistemáticas con diccionarios para identificar códigos de estado HTTP `200 OK` o `301 Redirect`.",
               "lab": {
-                "title": "Laboratorio Práctico: Análisis Forense de una Cookie de Sesión Robada",
-                "objective": "Inspeccionar los atributos de seguridad de una cookie (HttpOnly, Secure, SameSite) y entender cómo viaja un token de sesión.",
-                "prerequisites": "Navegador web con herramientas de desarrollador (F12).",
+                "title": "Laboratorio: Descubrimiento de Rutas Web con Gobuster",
+                "objective": "Localizar paneles ocultos en una aplicación web de prácticas.",
+                "prerequisites": "Gobuster y diccionario SecLists.",
                 "steps": [
                   {
                     "step": 1,
-                    "instruction": "Abrir las herramientas de desarrollo en el navegador (F12) y dirigirse a la pestaña Application o Almacenamiento.",
-                    "command": "Presionar F12 -> Pestaña Application -> Cookies",
-                    "explanation": "Permite visualizar los tokens de sesión locales que autentican al usuario."
-                  },
-                  {
-                    "step": 2,
-                    "instruction": "Auditar los flags de seguridad de las cookies: HttpOnly y Secure.",
-                    "command": "Verificar si la columna HttpOnly tiene un tick.",
-                    "explanation": "El flag HttpOnly evita que scripts maliciosos de JavaScript (XSS) lean la cookie directamente."
+                    "instruction": "Ejecutar enumeración de directorios.",
+                    "command": "gobuster dir -u http://192.168.56.101 -w /usr/share/wordlists/dirb/common.txt -t 20",
+                    "explanation": "Lanza 20 hilos simultáneos comprobando palabras clave contra el servidor."
                   }
                 ],
-                "deliverable": "Informe breve explicando la diferencia entre un código OTP y una cookie de sesión en un ataque AitM."
+                "deliverable": "Rutas web descubiertas con código de respuesta 200."
               },
               "terminal_sim": {
-                "initial_text": "Evilginx / AitM Forensic Analyzer\nComandos: 'inspect-session' o 'check-fido2'",
+                "initial_text": "Gobuster v3.5 Terminal\nPrueba: 'gobuster-run http://target.local'",
                 "commands": {
-                  "inspect-session": "[!] Sesión interceptada detectada:\nUsuario: victim@empresa.com\nCookie Name: ESTSAUTH / ESTSAUTHPERSISTENT\nValor: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIs...\nFlag HttpOnly: TRUE | Flag Secure: TRUE\n[ESTADO]: MFA superado por el atacante mediante robo de token.",
-                  "check-fido2": "[+] Validando método de autenticación...\nProtocolo: WebAuthn / FIDO2 Level 2\nOrigin Domain: evil-proxy-login.com != microsoftonline.com\n[BLOQUEO EXITOSO]: La llave criptográfica rechazó firmar la solicitud. Ataque AitM mitigado."
+                  "gobuster-run http://target.local": "/admin               (Status: 301) [Size: 178]\n/backup              (Status: 200) [Size: 2048]\n/robots.txt          (Status: 200) [Size: 154]\n[+] Enumeración finalizada: 3 rutas sensibles descubiertas."
                 }
               },
               "quiz": [
                 {
-                  "question": "¿Qué elemento exacto captura un ataque AitM como Evilginx para saltarse la autenticación en dos pasos (MFA)?",
+                  "question": "¿Qué código de estado HTTP indica que un recurso existe y está accesible?",
                   "options": [
-                    "La dirección MAC física de la tarjeta de red de la víctima",
-                    "La cookie o token de sesión autenticada emitida por el servidor legítimo",
-                    "El número de teléfono móvil del usuario",
-                    "El hash NTLM del controlador de dominio"
+                    "404 Not Found",
+                    "200 OK",
+                    "500 Internal Error",
+                    "403 Forbidden"
                   ],
                   "correctIndex": 1,
-                  "explanation": "El atacante intercepta la cookie de sesión final que el servidor legítimo genera una vez validado el MFA, permitiéndole clonar la sesión activa."
+                  "explanation": "El código HTTP 200 OK confirma que el archivo o ruta solicitada existe en el servidor."
                 }
               ],
               "video_script": {
-                "title": "Guion de Vídeo: Por qué el MFA de tu móvil ya no te protege (Evilginx & AitM)",
-                "target_duration": "4 - 5 Minutos",
+                "title": "Guion: Fuzzing Web y Rutas Ocultas con Gobuster",
+                "target_duration": "4 Minutos",
                 "scenes": [
                   {
-                    "time": "00:00 - 00:50",
-                    "visual": "Animación de un usuario recibiendo un SMS de verificación mientras un atacante en la sombra entra a su cuenta sin contraseña.",
-                    "audio": "¿Crees que tener activado el doble factor de autenticación te hace inmune a los hackers? Lamentablemente, ya no es así. Hoy en día los ciberdelincuentes utilizan técnicas de Adversary-in-the-Middle con herramientas como Evilginx para robar directamente tu sesión activa."
-                  },
+                    "time": "00:00 - 01:00",
+                    "visual": "Gobuster encontrando carpetas de backup y admin en tiempo real.",
+                    "audio": "¿Qué pasa si un administrador olvida borrar la carpeta de backup del servidor web? Gobuster la encuentra en segundos."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m2-2-identidad-credenciales",
+          "title": "Módulo 2: Ataques de Identidad y Credenciales",
+          "lessons": [
+            {
+              "id": "l2-3-phishing-aitm",
+              "title": "2.3 Phishing Moderno: AitM y Evasión de MFA (Evilginx)",
+              "duration": "45 min",
+              "summary": "Comprende cómo los proxies inversos interceptan tokens de sesión y cómo defender a la organización con FIDO2.",
+              "theory": "### 1. Ataques AitM (Adversary-in-the-Middle)\nHerramientas como **Evilginx** actúan como proxy en tiempo real entre la víctima y el servicio legítimo (Microsoft 365, Google). Cuando el usuario valida su MFA, el servidor emite la **cookie de sesión**, la cual es capturada por el proxy atacante, permitiendo acceso sin contraseñas.",
+              "lab": {
+                "title": "Laboratorio: Análisis Forense de Cookies de Sesión",
+                "objective": "Inspeccionar atributos de seguridad de una cookie (HttpOnly, Secure) y comprender el robo de sesiones.",
+                "prerequisites": "Navegador web (F12).",
+                "steps": [
                   {
-                    "time": "00:50 - 02:40",
-                    "visual": "Diagrama secuencial animado mostrando el proxy intermediario capturando la cookie de sesión.",
-                    "audio": "El atacante no adivina tu código: actúa como un espejo. Cuando introduces tus datos, él se los pasa al servidor real en tiempo real. Y cuando el servidor emite la cookie que dice 'este usuario ya está dentro', el atacante se la queda."
+                    "step": 1,
+                    "instruction": "Abrir DevTools y consultar almacenamiento de cookies.",
+                    "command": "Presionar F12 -> Application -> Cookies",
+                    "explanation": "Inspecciona los tokens de autenticación activos."
+                  }
+                ],
+                "deliverable": "Informe sobre el flag HttpOnly y la mitigación con FIDO2."
+              },
+              "terminal_sim": {
+                "initial_text": "AitM Session Interceptor\nPrueba: 'inspect-session'",
+                "commands": {
+                  "inspect-session": "[!] Sesión interceptada: victim@empresa.com\nCookie: ESTSAUTH=eyJ0eXAiOiJKV1QiLCJhbGci...\n[ESTADO]: Bypass MFA exitoso mediante clonación de cookie."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué elemento exacto captura un ataque AitM para saltarse el MFA?",
+                  "options": [
+                    "La clave privada del servidor",
+                    "La cookie de sesión autenticada",
+                    "El número de teléfono",
+                    "La IP pública"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "El atacante roba la cookie de sesión activa que el servidor genera tras validar el MFA."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Por qué el MFA de tu móvil ya no te protege (Evilginx)",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Diagrama de Evilginx como proxy capturando la cookie de sesión.",
+                    "audio": "Tener activado el doble factor de autenticación ya no basta. Hoy aprenderás cómo operan los ataques AitM y cómo defenderte."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l2-4-fuerza-bruta-hashcat",
+              "title": "2.4 Ataques de Fuerza Bruta y Crackeo con Hashcat",
+              "duration": "40 min",
+              "summary": "Descubre cómo los atacantes rompen contraseñas a partir de hashes mediante diccionarios y aceleración GPU con Hashcat.",
+              "theory": "### 1. Hashes y Funciones Unidireccionales\nLas bases de datos no almacenan contraseñas en texto plano, sino hashes criptográficos (MD5, SHA-256, NTLM, bcrypt). Para 'descifrarlas', los atacantes generan hashes masivos a partir de diccionarios (como `rockyou.txt`) o combinaciones matemáticas con Hashcat.",
+              "lab": {
+                "title": "Laboratorio: Crackeo de Hashes con Hashcat y Diccionarios",
+                "objective": "Recuperar una contraseña de prueba a partir de su hash SHA256.",
+                "prerequisites": "Hashcat instalado.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Lanzar ataque de diccionario contra un hash SHA256.",
+                    "command": "hashcat -m 1400 -a 0 hash_prueba.txt rockyou.txt",
+                    "explanation": "Modo 1400 indica SHA256 y modo de ataque 0 indica diccionario directo."
+                  }
+                ],
+                "deliverable": "Contraseña recuperada en texto plano."
+              },
+              "terminal_sim": {
+                "initial_text": "Hashcat v6.2 GPU Cracker\nPrueba: 'hashcat-crack 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'",
+                "commands": {
+                  "hashcat-crack 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8": "Hash.Type........: SHA256\nSpeed.Dev.#1.....: 842.5 MH/s\nStatus...........: Cracked\n5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8:password\n[+] Contraseña recuperada en 0.12 segundos."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Por qué las funciones hash modernas como bcrypt o Argon2 son más seguras que MD5 o SHA256?",
+                  "options": [
+                    "Porque usan claves públicas",
+                    "Porque son computacionalmente costosas (salting y múltiples rondas de trabajo)",
+                    "Porque no generan hashes",
+                    "Porque se cifran con TLS"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "bcrypt y Argon2 incorporan retardos deliberados y salting para frenar el crackeo masivo por GPU."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Cómo Descifran tus Contraseñas con Hashcat",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Hashcat procesando millones de hashes por segundo en pantalla.",
+                    "audio": "Si tu contraseña está en el diccionario rockyou.txt, un atacante la descifrará en menos de un segundo."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m2-3-amenazas-modernas",
+          "title": "Módulo 3: Amenazas Modernas e Inalámbricas",
+          "lessons": [
+            {
+              "id": "l2-5-infostealers-mercados",
+              "title": "2.5 InfoStealers y Mercados Clandestinos de Logs",
+              "duration": "45 min",
+              "summary": "Comprende la epidemia del malware ladrón de información (Lumma, RedLine, StealC) y cómo se comercializan los logs en la Dark Web.",
+              "theory": "### 1. ¿Qué es un InfoStealer?\nEs una familia de malware ligero diseñado para infectar equipos y exfiltrar en minutos: contraseñas guardadas en navegadores, carteras de criptomonedas, credenciales de VPN y cookies de sesión activas.\n\n### 2. El modelo de negocio en Telegram y foros rusos\nLos atacantes empaquetan los datos en ficheros ZIP llamados **'Logs'** y los venden en mercados clandestinos (Genesis Market, canales de Telegram) para accesos corporativos.",
+              "lab": {
+                "title": "Laboratorio: Análisis de un Registro de Infección de InfoStealer",
+                "objective": "Analizar la estructura de un log de InfoStealer sintético en entorno de laboratorio seguro.",
+                "prerequisites": "Editor de texto en entorno sandbox.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Inspeccionar las carpetas típicas extraídas por el stealer.",
+                    "command": "tree /F ./synthetic_stealer_log",
+                    "explanation": "Revisa directorios como Cookies, Autofill, Wallets y System_Info.txt."
+                  }
+                ],
+                "deliverable": "Informe de artefactos comprometidos identificados."
+              },
+              "terminal_sim": {
+                "initial_text": "Stealer Log Analyzer\nPrueba: 'parse-log log_sample.zip'",
+                "commands": {
+                  "parse-log log_sample.zip": "Analizando log de Lumma Stealer:\n- 142 credenciales de navegador\n- 47 cookies de sesión (Google, Amazon, Jira, GitHub)\n- Telegram Desktop session\n[CRÍTICO]: Credenciales de VPN corporativa localizadas."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál es el objetivo principal de un InfoStealer frente a un Ransomware?",
+                  "options": [
+                    "Cifrar los discos",
+                    "Robar credenciales y sesiones silenciosamente sin alertar a la víctima",
+                    "Minar Bitcoin",
+                    "Borrar el sistema operativo"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "El InfoStealer busca pasar desapercibido para exfiltrar credenciales y cookies de sesión antes de que sean rotadas."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: InfoStealers: El Malware Más Rentable de la Dark Web",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Estructura de un log de InfoStealer extrayendo contraseñas de Chrome.",
+                    "audio": "Hoy el cibercrimen no necesita hackear tu red: compran directamente tus cookies de sesión en Telegram por 5 dólares."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l2-6-wifi-evil-twin",
+              "title": "2.6 Ataques a Redes Wi-Fi: Evil Twin y Desautenticación",
+              "duration": "40 min",
+              "summary": "Descubre cómo los atacantes suplantan puntos de acceso Wi-Fi y desautentican usuarios legítimos para capturar tráfico.",
+              "theory": "### 1. El ataque Evil Twin (Gemelo Malvado)\nUn atacante despliega un punto de acceso Wi-Fi falso con el mismo SSID (nombre de red) y dirección MAC clonada que una red legítima (ej. Wi-Fi de un hotel o cafetería).\n\n### 2. Paquetes de Desautenticación 802.11\nEl protocolo 802.11 original permite enviar tramas de desautenticación en texto plano sin autenticar, obligando a los dispositivos a desconectarse y reconectarse al punto de acceso del atacante.",
+              "lab": {
+                "title": "Laboratorio: Detección de Tramas de Desautenticación Wi-Fi",
+                "objective": "Identificar ataques de desautenticación en una captura de tráfico de red pcap.",
+                "prerequisites": "Wireshark.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Filtrar tramas de desautenticación en Wireshark.",
+                    "command": "wlan.fc.type_subtype == 0x000c",
+                    "explanation": "Filtra tramas de control de tipo Deauth en tramas 802.11."
+                  }
+                ],
+                "deliverable": "Captura con ráfaga de paquetes deauth detectada."
+              },
+              "terminal_sim": {
+                "initial_text": "Aircrack-ng Wi-Fi Console\nPrueba: 'airodump-scan'",
+                "commands": {
+                  "airodump-scan": "BSSID              PWR  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID\n00:11:22:33:44:55  -42       25       10    0   6  130   WPA2 CCMP   PSK  Hotel_Guest\n00:11:22:33:44:99  -22      140       85   12   6  130   OPEN              Hotel_Guest [EVIL TWIN]"
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué estándar de seguridad Wi-Fi solventa la vulnerabilidad de tramas de desautenticación no protegidas?",
+                  "options": [
+                    "WEP",
+                    "WPA1",
+                    "WPA3 (con tramas de administración protegidas PMF)",
+                    "WPS"
+                  ],
+                  "correctIndex": 2,
+                  "explanation": "WPA3 exige tramas de gestión protegidas (PMF), impidiendo ataques de desautenticación spoofing."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Wi-Fi Falsas y Ataques Evil Twin",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Antena Wi-Fi emitiendo una señal clonada en un aeropuerto.",
+                    "audio": "Nunca te conectes a una red Wi-Fi abierta sin VPN. Hoy aprenderás cómo funciona el ataque del Evil Twin."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m2-4-vulnerabilidades-web",
+          "title": "Módulo 4: Análisis de Vulnerabilidades Web",
+          "lessons": [
+            {
+              "id": "l2-7-owasp-top-10",
+              "title": "2.7 Vulnerabilidades Web Críticas: OWASP Top 10 (SQLi y XSS)",
+              "duration": "50 min",
+              "summary": "Aprende los fallos más críticos de aplicaciones web: inyección de SQL (SQLi), Cross-Site Scripting (XSS) y fallos de autorización IDOR.",
+              "theory": "### 1. Inyección SQL (SQLi)\nOcurre cuando la entrada del usuario se concatena directamente en una consulta a la base de datos sin sanitizar:\n`SELECT * FROM users WHERE user = 'admin' AND pass = '' OR '1'='1'`\n\n### 2. Cross-Site Scripting (XSS)\nPermite inyectar código JavaScript malicioso en el navegador de otros usuarios para robar cookies de sesión o redirigir a sitios fraudulentos.",
+              "lab": {
+                "title": "Laboratorio: Detección y Mitigación de SQLi en Laboratorio DVWA",
+                "objective": "Probar una consulta SQL segura mediante Prepared Statements vs consulta vulnerable.",
+                "prerequisites": "DVWA o entorno local seguro.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Verificar la inyección con el payload clásico de autenticación.",
+                    "command": "' OR 1=1 -- -",
+                    "explanation": "Fuerza una condición siempre verdadera ignorando la validación de contraseña."
+                  }
+                ],
+                "deliverable": "Explicación de cómo las consultas preparadas (Prepared Statements) mitigan el ataque."
+              },
+              "terminal_sim": {
+                "initial_text": "SQL Injection Tester\nPrueba: 'test-sqli admin\\' OR 1=1 -- -'",
+                "commands": {
+                  "test-sqli admin' OR 1=1 -- -": "[+] Consulta vulnerable ejecutada:\nSELECT * FROM accounts WHERE username='admin' OR 1=1 -- -'\n[BYPASS EXITOSO]: Acceso concedido como Administrador.\n[MITIGACIÓN]: Usar PDO::prepare() con parámetros parametrizados."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál es la defensa definitiva contra las vulnerabilidades de inyección SQL?",
+                  "options": [
+                    "Cifrar la base de datos",
+                    "Uso de Consultas Preparadas (Prepared Statements / Parámetros vinculados)",
+                    "Cambiar el puerto del servidor",
+                    "Usar firewalls de red"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "Las consultas preparadas tratan los datos del usuario estrictamente como valores y nunca como código ejecutable."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Inyección SQL y XSS: El Top 10 de OWASP",
+                "target_duration": "5 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Diagrama de una inyección SQL alterando la lógica de la base de datos.",
+                    "audio": "Una simple comilla simple puede otorgar acceso de administrador a toda la base de datos de una empresa."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l2-8-shells-reversas",
+              "title": "2.8 Reverse Shells y Explotación Controlada con Metasploit",
+              "duration": "45 min",
+              "summary": "Comprende qué es un payload, la diferencia entre bind shell y reverse shell, y cómo los analistas evalúan la severidad con CVSS.",
+              "theory": "### 1. Reverse Shell vs Bind Shell\n* **Bind Shell:** El servidor víctima abre un puerto y el atacante se conecta (suele ser bloqueado por firewalls de entrada).\n* **Reverse Shell:** La víctima inicia la conexión saliente hacia la IP del atacante (evade la mayoría de firewalls que permiten tráfico de salida HTTP/HTTPS).",
+              "lab": {
+                "title": "Laboratorio: Captura de una Reverse Shell con Netcat en Entorno Local",
+                "objective": "Configurar un listener local y recibir una shell interactiva de prueba.",
+                "prerequisites": "Dos terminales en máquina local.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Poner un listener en escucha en el puerto 4444.",
+                    "command": "nc -lvnp 4444",
+                    "explanation": "Escucha conexiones entrantes en el socket TCP 4444."
+                  }
+                ],
+                "deliverable": "Conexión establecida y ejecución de `whoami` exitosa."
+              },
+              "terminal_sim": {
+                "initial_text": "Netcat Listener v1.10\nPrueba: 'nc-listen 4444'",
+                "commands": {
+                  "nc-listen 4444": "Listening on 0.0.0.0 4444\nConnection received from 192.168.1.88:51234\n$ whoami\nwww-data\n[+] Reverse shell establecida exitosamente."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Por qué los atacantes prefieren una Reverse Shell sobre una Bind Shell?",
+                  "options": [
+                    "Es más lenta",
+                    "Porque las conexiones salientes suelen estar permitidas por los firewalls de la víctima",
+                    "No requiere IP",
+                    "Solo funciona en Windows"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "La reverse shell sortea firewalls de entrada porque la víctima es quien origina la petición hacia el exterior."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Anatomía de una Reverse Shell",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Consola de Netcat recibiendo el prompt remoto del servidor.",
+                    "audio": "¿Cómo toma el control un atacante tras explotar una vulnerabilidad? Mediante una reverse shell."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m2-5-seguridad-defensiva",
+          "title": "Módulo 5: Seguridad Defensiva y Bastionado (Hardening)",
+          "lessons": [
+            {
+              "id": "l2-9-bastionado-servidores",
+              "title": "2.9 Bastionado de Servidores: Firewalls UFW, SSH Seguro y Fail2ban",
+              "duration": "45 min",
+              "summary": "Aprende a proteger un servidor expuesto a Internet: deshabilitar autenticación por contraseña en SSH, configurar reglas de firewall y bloquear ataques de fuerza bruta.",
+              "theory": "### 1. Principio de Mínimo Privilegio y Exposición Mínima\nTodo puerto o servicio innecesario debe ser deshabilitado. La configuración de SSH debe exigir autenticación exclusiva por clave pública (`PasswordAuthentication no`) y deshabilitar el acceso directo de root (`PermitRootLogin no`).\n\n### 2. Fail2ban\nMonitoriza los logs del sistema (`/var/log/auth.log`) y agrega automáticamente reglas al firewall para bloquear temporalmente las IPs que fallen múltiples intentos de acceso.",
+              "lab": {
+                "title": "Laboratorio: Configuración de Reglas de Firewall con UFW",
+                "objective": "Configurar una política de bloqueo por defecto y habilitar únicamente SSH y HTTPS.",
+                "prerequisites": "Linux con privilegios sudo.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Establecer bloqueo por defecto para conexiones entrantes.",
+                    "command": "sudo ufw default deny incoming && sudo ufw allow 22/tcp && sudo ufw allow 443/tcp && sudo ufw enable",
+                    "explanation": "Cierra todas las puertas de entrada salvo los servicios autorizados."
+                  }
+                ],
+                "deliverable": "Salida de `sudo ufw status verbose` confirmando el bastionado."
+              },
+              "terminal_sim": {
+                "initial_text": "UFW Firewall Controller\nPrueba: 'ufw-status'",
+                "commands": {
+                  "ufw-status": "Status: active\nDefault: deny (incoming), allow (outgoing)\nTo                         Action      From\n--                         ------      ----\n22/tcp                     ALLOW IN    Anywhere\n443/tcp                    ALLOW IN    Anywhere"
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué directiva de sshd_config impide el acceso directo del usuario root a un servidor Linux?",
+                  "options": [
+                    "DisableRoot yes",
+                    "PermitRootLogin no",
+                    "RootAccess deny",
+                    "NoRoot yes"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "PermitRootLogin no bloquea el login directo de root, forzando a los administradores a usar usuarios individuales con sudo."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Cómo Blindar un Servidor Linux en 10 Minutos",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Ataques de fuerza bruta siendo bloqueados automáticamente por Fail2ban.",
+                    "audio": "Tan pronto publicas un servidor en Internet, recibirá miles de intentos de intrusión por hora. Aprende a bastionarlo."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l2-10-monitorizacion-logs",
+              "title": "2.10 Monitorización y Análisis de Logs del Sistema",
+              "duration": "40 min",
+              "summary": "Aprende a buscar evidencias en logs de autenticación (auth.log, Windows Event ID 4624 y 4625) para detectar intrusiones.",
+              "theory": "### 1. El valor de los registros (Logs)\nLos registros son la 'caja negra' de la ciberseguridad. En Windows, el visor de eventos registra eventos críticos:\n* **Event ID 4624:** Inicio de sesión exitoso.\n* **Event ID 4625:** Inicio de sesión fallido (indicador de fuerza bruta o robo de credenciales).\n* **Event ID 7045:** Instalación de un nuevo servicio (indicador de persistencia).",
+              "lab": {
+                "title": "Laboratorio: Filtrado de Intentos Fallidos en auth.log",
+                "objective": "Extraer las IPs atacantes a partir de los registros de autenticación en Linux.",
+                "prerequisites": "Bash.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Filtrar intentos fallidos de autenticación SSH.",
+                    "command": "grep \"Failed password\" /var/log/auth.log | awk '{print $(NF-3)}' | sort | uniq -c | sort -nr",
+                    "explanation": "Muestra las direcciones IP que más intentos fallidos han generado agrupadas por frecuencia."
+                  }
+                ],
+                "deliverable": "Top 3 de direcciones IP detectadas en el análisis."
+              },
+              "terminal_sim": {
+                "initial_text": "Log Parser CLI\nPrueba: 'parse-auth-log'",
+                "commands": {
+                  "parse-auth-log": "   1842 198.51.100.23 (Brute force SSH detectado)\n    420 203.0.113.88\n     12 192.168.1.45\n[ALERTA]: Bloqueando 198.51.100.23 en firewall iptables."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué Event ID de Windows indica un intento de inicio de sesión fallido?",
+                  "options": [
+                    "4624",
+                    "4625",
+                    "1102",
+                    "7045"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "El Event ID 4625 registra cada intento fallido de autenticación en los registros de seguridad de Windows."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Caza de Intrusos a través de los Logs de Seguridad",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Líneas de logs sospechosas resaltadas en rojo y terminal forense.",
+                    "audio": "Los atacantes siempre dejan huellas. En este vídeo aprenderás a leer la telemetría de seguridad como un analista forense."
                   }
                 ]
               }
@@ -322,73 +1036,652 @@
       "badge_color": "indigo",
       "title": "Nivel 3: Threat Intelligence (CTI) & Operaciones Avanzadas",
       "subtitle": "Framework MITRE ATT&CK, gestión de IoCs, análisis de APTs, Threat Hunting y DFIR",
-      "description": "Diseñado para analistas de SOC nivel 2/3, ingenieros de detección y consultores de Threat Intel. Domina la correlación de indicadores de compromiso, el análisis de comportamiento de grupos de amenaza persistente avanzada (APTs) y la respuesta a incidentes a escala corporativa.",
+      "description": "Formación de élite diseñada para analistas de SOC nivel 2/3, ingenieros de detección y consultores de Threat Intel. Domina la correlación de indicadores de compromiso, el análisis de comportamiento de grupos de amenaza persistente avanzada (APTs), la creación de reglas de detección Sigma/YARA y la respuesta a incidentes críticos.",
       "duration": "40 Horas",
       "modules_count": 6,
       "modules": [
         {
-          "id": "m3-cti-core",
-          "title": "Módulo 1: Fundamentos de CTI y el Framework MITRE ATT&CK",
+          "id": "m3-1-fundamentos-cti",
+          "title": "Módulo 1: Fundamentos de CTI y MITRE ATT&CK",
           "lessons": [
             {
-              "id": "l3-1-mitre-pyramid-pain",
+              "id": "l3-1-piramide-dolor",
               "title": "3.1 La Pirámide del Dolor de David Bianco y MITRE ATT&CK",
               "duration": "50 min",
               "summary": "Aprende a priorizar defensas detectando Tácticas, Técnicas y Procedimientos (TTPs) en lugar de simples hashes o direcciones IP volátiles.",
-              "theory": "### 1. La Pirámide del Dolor (David Bianco)\n* Hashes: Dolor trivial para el adversario.\n* Direcciones IP y Dominios: Dolor simple/bajo.\n* Herramientas (Mimikatz, Cobalt Strike): Dolor difícil.\n* TTPs (Tácticas, Técnicas y Procedimientos): Dolor MÁXIMO.\n\n### 2. Estructura MITRE ATT&CK\n* Tácticas (El por qué): Initial Access, Persistence, Defense Evasion, Exfiltration.\n* Técnicas (El cómo): PowerShell (T1059.001), Process Injection (T1055).",
+              "theory": "### 1. La Pirámide del Dolor (David Bianco)\n* **Hashes (SHA256, MD5):** Dolor Trivial para el atacante (cambiar 1 bit crea un hash nuevo).\n* **Direcciones IP / Dominios:** Dolor Simple/Bajo (usan proxies y botnets rotativas).\n* **Herramientas (Cobalt Strike, Mimikatz):** Dolor Difícil (recompilar o alterar el framework).\n* **TTPs (Tácticas, Técnicas y Procedimientos):** Dolor MÁXIMO (obliga a reaprender la metodología operativa).\n\n### 2. Estructura MITRE ATT&CK\n* **Tácticas (El por qué):** Initial Access, Persistence, Credential Access, Exfiltration.\n* **Técnicas (El cómo):** PowerShell (`T1059.001`), Inyección en procesos (`T1055`).",
               "lab": {
-                "title": "Laboratorio Práctico: Mapeo de un Informe de Incidente a la Matriz MITRE ATT&CK",
-                "objective": "Leer un informe de telemetría de un ataque de ransomware real y extraer los IoCs y las técnicas TTP de MITRE ATT&CK correspondientes.",
-                "prerequisites": "Acceso al navegador web y al portal https://attack.mitre.org",
+                "title": "Laboratorio: Mapeo de un Ataque Real a la Matriz MITRE ATT&CK",
+                "objective": "Mapear eventos de telemetría de un ataque de ransomware a técnicas específicas de MITRE.",
+                "prerequisites": "Portal https://attack.mitre.org",
                 "steps": [
                   {
                     "step": 1,
-                    "instruction": "Analizar la línea de comandos sospechosa detectada en telemetría.",
-                    "command": "powershell.exe -enc JAB3AGMAIAA9ACAATgBlAHcALQBPAGIAagBlAGMAdAA...",
-                    "explanation": "Identificar ejecución codificada con PowerShell."
-                  },
-                  {
-                    "step": 2,
-                    "instruction": "Mapear la técnica en la matriz ATT&CK.",
-                    "command": "Identificar Técnica ID: T1059.001 (PowerShell) + T1027 (Obfuscated/Encoded Information)",
-                    "explanation": "Correlacionar las acciones observadas en el host con el marco estándar de la industria."
+                    "instruction": "Mapear ejecución ofuscada en PowerShell.",
+                    "command": "Identificar Técnica T1059.001 + T1027",
+                    "explanation": "Clasifica la acción en la táctica de Ejecución y Evasión de Defensas."
                   }
                 ],
-                "deliverable": "Tabla con al menos 3 técnicas identificadas del ataque con sus IDs de MITRE y recomendaciones de mitigación."
+                "deliverable": "Matriz resumida con las técnicas TTP identificadas."
               },
               "terminal_sim": {
-                "initial_text": "Threat Intel Engine - MISP & MITRE Query CLI\nComandos: 'mitre-lookup T1059.001' o 'extract-iocs incident.log'",
+                "initial_text": "MITRE ATT&CK Engine\nPrueba: 'mitre-lookup T1059.001'",
                 "commands": {
-                  "mitre-lookup T1059.001": "[MITRE ATT&CK INFO]\nTécnica: T1059.001 (Command and Scripting Interpreter: PowerShell)\nTáctica: TA0002 (Execution)\nPlataformas: Windows\nMitigaciones: M1038 (Execution Prevention), M1042 (Disable or Remove Feature or Program)\nReglas Sigma recomendadas: proc_creation_win_powershell_base64_encoded",
-                  "extract-iocs incident.log": "[+] Analizando telemetría del incidente...\n[IOCs Extraídos]:\n- SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n- C2 IP: 185.220.101.5 (AS197695 - bulletproof hoster)\n- MITRE Technique: T1071.001 (Application Layer Protocol: Web Protocols)\n[NIVEL DE AMENAZA]: ALTO - Afiliado Ransomware detectado."
+                  "mitre-lookup T1059.001": "[MITRE ATT&CK INFO]\nTécnica: T1059.001 (Command and Scripting Interpreter: PowerShell)\nTáctica: TA0002 (Execution)\nMitigación: M1038 (Execution Prevention) / Reglas Sigma asociadas disponibles."
                 }
               },
               "quiz": [
                 {
-                  "question": "Según la Pirámide del Dolor de David Bianco, ¿qué tipo de indicador causa el máximo impacto y dificultad a los adversarios si logramos detectarlo?",
+                  "question": "¿Qué artefacto de la Pirámide del Dolor causa el mayor impacto al adversario si lo bloqueamos?",
                   "options": [
-                    "Los hashes SHA256 de sus binarios maliciosos",
-                    "Las direcciones IP de sus servidores Command & Control (C2)",
-                    "Sus TTPs (Tácticas, Técnicas y Procedimientos)",
-                    "Los registros MX de sus servidores de phishing"
+                    "Direcciones IP",
+                    "Hashes de ficheros",
+                    "TTPs (Tácticas, Técnicas y Procedimientos)",
+                    "Nombres de dominio"
                   ],
                   "correctIndex": 2,
-                  "explanation": "Modificar un hash o una IP le cuesta segundos al atacante. En cambio, cambiar sus TTPs (su forma de actuar y sus herramientas metodológicas) le cuesta semanas o meses."
+                  "explanation": "Detectar y bloquear TTPs obliga al adversario a rediseñar por completo su metodología y entrenamiento operativo."
                 }
               ],
               "video_script": {
-                "title": "Guion de Vídeo: Cómo los Analistas de CTI Cazan Amenazas con la Pirámide del Dolor y MITRE ATT&CK",
+                "title": "Guion: Caza de Amenazas con MITRE ATT&CK y la Pirámide del Dolor",
                 "target_duration": "5 Minutos",
                 "scenes": [
                   {
                     "time": "00:00 - 01:00",
-                    "visual": "Gráfico 3D de la Pirámide del Dolor con luces rojas en la cima (TTPs).",
-                    "audio": "Si solo bloqueas direcciones IP y hashes de virus, siempre irás un paso por detrás de los cibercriminales. En el mundo profesional de la Inteligencia de Amenazas, aplicamos la Pirámide del Dolor y la matriz MITRE ATT&CK para golpear donde realmente les duele."
-                  },
+                    "visual": "Animación 3D de la Pirámide del Dolor.",
+                    "audio": "Si solo bloqueas direcciones IP y hashes, siempre irás un paso por detrás. Golpea donde realmente duele: en sus TTPs."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l3-2-ciclo-vida-cti",
+              "title": "3.2 El Ciclo de Vida de la Inteligencia de Amenazas",
+              "duration": "45 min",
+              "summary": "Domina las 6 fases del ciclo de CTI: Dirección, Recolección, Procesamiento, Análisis, Difusión y Retroalimentación.",
+              "theory": "### 1. Las Fases del Ciclo de Inteligencia\n1. **Requisitos y Dirección:** ¿Qué preguntas estratégicas necesita responder la organización?\n2. **Recolección:** Telemetría de red, sensores EDR, feeds de IoCs, foros de la Dark Web.\n3. **Procesamiento:** Normalización, deduplicación y enriquecimiento de datos.\n4. **Análisis:** Transformar datos en inteligencia procesable (contexto y atribución).\n5. **Difusión:** Entrega de informes ejecutivos o feeds automatizados a los firewalls/SIEM.\n6. **Retroalimentación:** Medir la efectividad de las decisiones tomadas.",
+              "lab": {
+                "title": "Laboratorio: Redacción de un Boletín de Inteligencia (Flash Alert)",
+                "objective": "Estructurar un informe de amenaza urgente con resumen ejecutivo, análisis técnico y recomendaciones.",
+                "prerequisites": "Editor de texto.",
+                "steps": [
                   {
-                    "time": "01:00 - 03:30",
-                    "visual": "Navegación interactiva por la matriz MITRE ATT&CK mostrando cómo se reconstruye la cadena de ataque de un grupo APT.",
-                    "audio": "MITRE ATT&CK es el lenguaje universal de la ciberseguridad. En esta lección aprenderás a deconstruir cualquier ciberataque en sus tácticas y técnicas fundamentales para entrenar a tus sistemas de detección."
+                    "step": 1,
+                    "instruction": "Definir el impacto, los IoCs observables y las reglas de detección sugeridas.",
+                    "command": "Crear Flash_Alert_CVE-2026-XXXX.md",
+                    "explanation": "Formato estandarizado de difusión rápida para equipos de SOC y CISO."
+                  }
+                ],
+                "deliverable": "Documento Flash Alert de 1 página con formato profesional."
+              },
+              "terminal_sim": {
+                "initial_text": "CTI Intelligence Dispatcher\nPrueba: 'generate-flash-report'",
+                "commands": {
+                  "generate-flash-report": "[FLASH ALERT]: Campaña de Ransomware activo dirigida al sector sanitario.\nSeveridad: CRÍTICA (CVSS 9.8)\nIoCs Adjuntos: 12 dominios C2, 4 hashes SHA256\nDifundido a SIEM Splunk y Microsoft Sentinel exitosamente."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál es la primera fase del ciclo de vida de CTI?",
+                  "options": [
+                    "Recolección de datos",
+                    "Dirección y Requisitos",
+                    "Análisis forense",
+                    "Difusión a usuarios"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "Sin definir los requisitos y prioridades estratégicas de la organización, la recolección de datos carece de objetivo y efectividad."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Cómo Piensa un Analista de Ciberinteligencia",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Sala de crisis SOC con analistas interpretando alertas mundiales.",
+                    "audio": "La inteligencia de amenazas no es recolectar datos a lo loco, sino anticiparse al próximo movimiento del adversario."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m3-2-plataformas-tip",
+          "title": "Módulo 2: Gestión de IoCs y Plataformas TIP",
+          "lessons": [
+            {
+              "id": "l3-3-stix-taxii",
+              "title": "3.3 Estándares de Inteligencia: STIX, TAXII y Tipos de IoCs",
+              "duration": "45 min",
+              "summary": "Comprende cómo se intercambia la inteligencia de amenazas de forma estandarizada entre organizaciones mundiales mediante STIX y TAXII.",
+              "theory": "### 1. STIX (Structured Threat Information Expression)\nEs un lenguaje serializado en JSON diseñado específicamente para describir ciberamenazas: actores de amenaza (`ThreatActor`), campañas (`Campaign`), indicadores (`Indicator`) y patrones de ataque (`AttackPattern`).\n\n### 2. TAXII (Trusted Automated eXchange of Intelligence Information)\nEs el protocolo de transporte (sobre HTTPS) que permite a las organizaciones suscribirse y compartir colecciones STIX automáticamente máquina a máquina.",
+              "lab": {
+                "title": "Laboratorio: Parsing y Creación de un Paquete STIX 2.1 en Python",
+                "objective": "Generar un objeto Indicator en formato JSON STIX 2.1 con Python.",
+                "prerequisites": "Python 3 instalado.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Crear un objeto Indicator STIX vinculando un hash malicioso.",
+                    "command": "python -c \"import json; print(json.dumps({'type': 'indicator', 'spec_version': '2.1', 'id': 'indicator--8e2e28ce-bf0c-4ee7-8acb-272e27c08272', 'pattern': '[file:hashes.\\'SHA-256\\' = \\'e3b0c442...\\']', 'pattern_type': 'stix'}, indent=2))\"",
+                    "explanation": "Genera el estándar JSON consumible por plataformas TIP de todo el mundo."
+                  }
+                ],
+                "deliverable": "Fichero JSON válido con el esquema STIX 2.1."
+              },
+              "terminal_sim": {
+                "initial_text": "STIX / TAXII Engine CLI\nPrueba: 'stix-validate indicator.json'",
+                "commands": {
+                  "stix-validate indicator.json": "[+] Validando esquema STIX 2.1...\nTipo de objeto: indicator\nPatrón: [ipv4-addr:value = '198.51.100.42']\nEstado: VÁLIDO. Listo para ingestión en MISP."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué protocolo sobre HTTPS se encarga de transportar y sincronizar paquetes STIX entre organizaciones?",
+                  "options": [
+                    "TAXII",
+                    "BGP",
+                    "SNMP",
+                    "MQTT"
+                  ],
+                  "correctIndex": 0,
+                  "explanation": "TAXII es el protocolo de aplicación diseñado específicamente para transferir inteligencia en formato STIX."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: STIX y TAXII: El Lenguaje Universal de las Amenazas",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Flujo de datos automatizado entre dos servidores SOC compartiendo IoCs.",
+                    "audio": "¿Cómo se comunican los centros de ciberseguridad internacionales? Mediante STIX y TAXII."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l3-4-misp-opencti",
+              "title": "3.4 Plataformas TIP en Acción: MISP y OpenCTI",
+              "duration": "50 min",
+              "summary": "Aprende a correlacionar eventos de seguridad, crear clústeres de amenazas y automatizar feeds hacia firewalls con MISP y OpenCTI.",
+              "theory": "### 1. ¿Qué es una TIP (Threat Intelligence Platform)?\nUna TIP centraliza millones de IoCs provenientes de fuentes comerciales, gubernamentales (CERTs) y fuentes abiertas (OSINT), enriqueciéndolos y correlacionándolos para evitar falsos positivos.\n\n### 2. MISP (Malware Information Sharing Platform)\nPlataforma de código abierto adoptada por la OTAN, agencias gubernamentales y grandes empresas para compartir telemetría de malware y generar reglas de bloqueo en tiempo real.",
+              "lab": {
+                "title": "Laboratorio: Consulta a la API de MISP para Enriquecimiento de IoCs",
+                "objective": "Consultar un hash o dominio sospechoso a través de la API REST de MISP con Python.",
+                "prerequisites": "Python y requests.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Consultar atributos relacionados con un hash en el servidor TIP.",
+                    "command": "python -c \"print('[MISP API]: Evento #412 localizado: Ransomware LockBit 3.0 asociado a 14 eventos globales.')\"",
+                    "explanation": "Demuestra cómo automatizar la correlación de IoCs desde el SOC."
+                  }
+                ],
+                "deliverable": "Resumen de la correlación de amenazas obtenida."
+              },
+              "terminal_sim": {
+                "initial_text": "MISP REST CLI\nPrueba: 'misp-search evil-domain.com'",
+                "commands": {
+                  "misp-search evil-domain.com": "[MISP MATCH FOUND]:\nEvento ID: 1084 - Campaña de Phishing AitM bancario\nNivel de amenaza: ALTO\nOrganización creadora: CIRCL / CSIRT Nacional\nEtiquetas: tlp:amber, malware:evilginx"
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál es la principal ventaja de utilizar una plataforma TIP como MISP u OpenCTI?",
+                  "options": [
+                    "Reemplazar al antivirus",
+                    "Centralizar, correlacionar y compartir inteligencia de amenazas de forma automatizada",
+                    "Crear páginas web",
+                    "Cifrar discos duros"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "Las plataformas TIP permiten agregar información de múltiples fuentes y correlacionar ataques para responder antes."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Operativa Real en un SOC con MISP y OpenCTI",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Interfaz de OpenCTI mostrando nodos interconectados de grupos de amenaza.",
+                    "audio": "Mira cómo los analistas de Threat Intelligence conectan los puntos entre un correo de phishing y un grupo de cibercrimen respaldado por un estado."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m3-3-analisis-adversarios",
+          "title": "Módulo 3: Análisis de Adversarios y Grupos APT",
+          "lessons": [
+            {
+              "id": "l3-5-grupos-apt",
+              "title": "3.5 Perfilado de Grupos APT (Advanced Persistent Threats)",
+              "duration": "50 min",
+              "summary": "Comprende la estructura de los grupos de ciberespionaje patrocinados por estados (Lazarus, APT28 Fancy Bear, Volt Typhoon) y sus motivaciones geopolíticas.",
+              "theory": "### 1. ¿Qué define a una APT?\n* **Avanzada:** Diseña armamento cibernético propio, exploits Zero-Day y técnicas evasivas de última generación.\n* **Persistente:** Mantiene accesos en la red de la víctima durante meses o años sin ser detectada.\n* **Amenaza:** Cuenta con respaldo financiero y recursos humanos ilimitados (a menudo agencias de inteligencia militar).\n\n### 2. Grupos Notorios\n* **Lazarus Group (Corea del Norte):** Enfoque en robo financiero masivo (SWIFT, exchanges cripto) y espionaje.\n* **APT29 / Cozy Bear (Rusia):** Espionaje diplomático e infiltración en cadenas de suministro (SolarWinds).\n* **Volt Typhoon (China):** Preposicionamiento estratégico en infraestructuras críticas (energía, puertos, telecomunicaciones).",
+              "lab": {
+                "title": "Laboratorio: Análisis de Atribución y Campaña con MITRE Groups",
+                "objective": "Comparar los TTPs habituales de dos grupos APT diferentes para evaluar solapamientos de infraestructura.",
+                "prerequisites": "Portal MITRE ATT&CK Groups.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Revisar las técnicas de persistencia de APT29.",
+                    "command": "Consultar técnicas T1078 (Valid Accounts) y T1098 (Account Manipulation)",
+                    "explanation": "Demuestra la preferencia del grupo por técnicas 'Living off the Land' (LotL)."
+                  }
+                ],
+                "deliverable": "Matriz comparativa de TTPs de persistencia entre dos grupos APT."
+              },
+              "terminal_sim": {
+                "initial_text": "Adversary Profiler CLI\nPrueba: 'profile-apt APT29'",
+                "commands": {
+                  "profile-apt APT29": "[APT29 / Cozy Bear Profile]\nOrigen probable: SVR (Federación Rusa)\nObjetivos: Gobiernos, think-tanks, proveedores de nube\nTécnicas estrella: T1078.004 (Cloud Accounts), T1556 (Modify Authentication Process)\nCampaña emblemática: SolarWinds Supply Chain Compromise."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué caracteriza principalmente a las técnicas 'Living off the Land' (LotL) empleadas por grupos como Volt Typhoon?",
+                  "options": [
+                    "Usar herramientas legítimas nativas del propio sistema (PowerShell, WMI, netsh) en lugar de subir malware a disco",
+                    "Instalar siempre troyanos conocidos",
+                    "Hacer ataques de fuerza bruta ruidosos",
+                    "Apagar los servidores de la víctima"
+                  ],
+                  "correctIndex": 0,
+                  "explanation": "LotL utiliza herramientas legítimas del sistema operativo para pasar desapercibido ante los antivirus y EDRs."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Dentro de los Grupos APT: Los Hackers Militares Más Peligrosos",
+                "target_duration": "5 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Mapa geopolítico mundial con líneas de ataque cibernético entre potencias.",
+                    "audio": "No son aficionados en un sótano: son ejércitos digitales organizados con presupuestos millonarios. Hoy analizamos las APTs."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l3-6-raas-ransomware",
+              "title": "3.6 Ecosistema RaaS (Ransomware-as-a-Service) y Doble Extorsión",
+              "duration": "45 min",
+              "summary": "Descubre cómo opera el cibercrimen organizado moderno: operadores principales, afiliados, brokers de acceso inicial (IABs) y sitios de fuga de datos (Leak Sites).",
+              "theory": "### 1. El modelo de franquicia RaaS\n* **Desarrolladores:** Crean el cifrador y la infraestructura del panel de control.\n* **Afiliados:** Compran o alquilan el malware y ejecutan la intrusión (se llevan el 70-80% del rescate).\n* **Initial Access Brokers (IABs):** Venden accesos previos a redes comprometidas (RDP expuesto, credenciales de VPN).\n\n### 2. Doble y Triple Extorsión\n* Extorsión 1: Pagar por la clave de descifrado.\n* Extorsión 2: Pagar para que no publiquen los gigabytes robados en su Leak Site de la red Tor.\n* Extorsión 3: Acosar a los clientes y accionistas de la empresa víctima.",
+              "lab": {
+                "title": "Laboratorio: Monitorización de Sitios de Fuga (Leak Sites) en Tor",
+                "objective": "Aprender cómo los analistas de Threat Intel monitorizan la actividad de cárteles de ransomware mediante APIs de telemetría de ransomware.",
+                "prerequisites": "Python.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Consultar las últimas víctimas públicas reportadas por grupos de ransomware.",
+                    "command": "python -c \"print('[RANSOMWARE FEED]: LockBit 3.0 publicó 3 nuevas empresas en su portal Tor en las últimas 24 horas.')\"",
+                    "explanation": "Muestra cómo alimentar los feeds de alerta temprana de la organización."
+                  }
+                ],
+                "deliverable": "Informe de tendencias del ecosistema RaaS actual."
+              },
+              "terminal_sim": {
+                "initial_text": "RaaS Dark Web Feed\nPrueba: 'check-leak-sites'",
+                "commands": {
+                  "check-leak-sites": "[TOR LEAK SITES MONITOR]:\n- Grupo: LockBit 3.0 | Víctimas activas: 1.420 | Estado: Activo\n- Grupo: BlackCat / ALPHV | Estado: Desmantelado por FBI\n- Grupo: Play Ransomware | Víctimas activas: 340 | Frecuencia: Alta"
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿En qué consiste la técnica de 'Doble Extorsión' en el ransomware moderno?",
+                  "options": [
+                    "Cifrar dos veces los mismos archivos",
+                    "Exigir rescate por la clave de descifrado Y amenazar con publicar los datos confidenciales robados",
+                    "Cobrar en dos criptomonedas diferentes",
+                    "Atacar dos servidores a la vez"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "La doble extorsión garantiza que incluso si la empresa tiene copias de seguridad, sufra extorsión por la fuga de datos confidenciales."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: El Negocio Multimillonario del Ransomware-as-a-Service",
+                "target_duration": "5 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Captura de pantalla de un panel de afiliado de ransomware y un sitio de fuga .onion.",
+                    "audio": "El ransomware ya no es un virus solitario: es una corporación criminal con soporte 24/7 y modelos de franquicia."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m3-4-threat-hunting",
+          "title": "Módulo 4: Threat Hunting & Reglas de Detección",
+          "lessons": [
+            {
+              "id": "l3-7-reglas-sigma-yara",
+              "title": "3.7 Detección Avanzada: Reglas Sigma y Reglas YARA",
+              "duration": "50 min",
+              "summary": "Aprende a redactar reglas YARA para cazar binarios maliciosos en memoria/disco y reglas Sigma para detectar comportamientos en cualquier SIEM.",
+              "theory": "### 1. Reglas YARA: El clasificador de malware\nYARA busca patrones específicos de cadenas (strings en texto plano o hexadecimal) y condiciones booleanas dentro de archivos binarios o volcados de memoria.\n\n### 2. Reglas Sigma: El estándar universal de SIEM\nSigma permite escribir una regla de detección de eventos de log en YAML una sola vez, y traducirla automáticamente a consultas para Splunk, Elastic, Microsoft Sentinel o QRadar.",
+              "lab": {
+                "title": "Laboratorio: Creación de una Regla Sigma para Detectar Mimikatz",
+                "objective": "Escribir y validar una regla Sigma que detecte la ejecución del dump de credenciales LSASS.",
+                "prerequisites": "Editor de texto YAML.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Estructurar la detección del acceso a lsass.exe en Sysmon Event ID 10.",
+                    "command": "cat << 'EOF' > sigma_lsass.yml\ntitle: Acceso sospechoso a memoria de LSASS\nstatus: experimental\nlogsource:\n  category: process_access\n  product: windows\ndetection:\n  selection:\n    TargetImage|endswith: '\\lsass.exe'\n    GrantedAccess: '0x1010'\n  condition: selection\nEOF",
+                    "explanation": "Crea una regla Sigma estandarizada de detección de robo de credenciales."
+                  }
+                ],
+                "deliverable": "Regla Sigma válida y traducción a consulta de SIEM."
+              },
+              "terminal_sim": {
+                "initial_text": "Sigma & YARA Rule Engine\nPrueba: 'sigmac sigma_lsass.yml -t splunk'",
+                "commands": {
+                  "sigmac sigma_lsass.yml -t splunk": "[+] Traducción a Splunk Search Processing Language (SPL):\nindex=* TargetImage=\"*\\\\lsass.exe\" GrantedAccess=\"0x1010\"\n[REGLA VÁLIDA]: Lista para ser desplegada en el SIEM corporativo."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál es la principal ventaja del formato de reglas Sigma?",
+                  "options": [
+                    "Es un formato genérico que se traduce a cualquier motor de SIEM (Splunk, Elastic, Sentinel)",
+                    "Solo funciona con Linux",
+                    "Reemplaza a los firewalls",
+                    "Descifra hashes NTLM"
+                  ],
+                  "correctIndex": 0,
+                  "explanation": "Sigma es independiente del proveedor: escribes la regla una vez en YAML y la compilas para cualquier SIEM."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Cómo los Analistas Cazadores Usan Reglas Sigma y YARA",
+                "target_duration": "5 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Código de una regla YARA detectando un troyano en memoria.",
+                    "audio": "No esperes a que salte la alarma: aprende a buscar amenazas activas con YARA y Sigma."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l3-8-sysmon-edr",
+              "title": "3.8 Telemetría de Endpoints con Sysmon y EDR",
+              "duration": "45 min",
+              "summary": "Descubre cómo monitorizar la actividad profunda de los puestos de trabajo mediante Microsoft Sysmon para detectar inyecciones de código y persistencia.",
+              "theory": "### 1. ¿Qué aporta Sysmon frente a los logs estándar?\nSystem Monitor (Sysmon) de Sysinternals añade telemetría de bajo nivel indispensable para analistas:\n* **Event ID 1:** Creación de procesos con línea de comandos completa y hash del binario.\n* **Event ID 3:** Conexiones de red originadas por procesos locales.\n* **Event ID 7:** Carga de módulos DLL (detección de DLL Hijacking).\n* **Event ID 8:** Creación de hilos remotos (detección de Process Injection).",
+              "lab": {
+                "title": "Laboratorio: Detección de Inyección de Procesos en Sysmon",
+                "objective": "Analizar un evento Sysmon ID 8 en el visor de eventos para detectar inyecciones de código en memoria.",
+                "prerequisites": "PowerShell.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Consultar eventos de creación de hilos remotos en el log de Sysmon.",
+                    "command": "Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-Sysmon/Operational'; Id=8} -MaxEvents 5",
+                    "explanation": "Permite auditar si un proceso no confiable está inyectando código en explorer.exe o svchost.exe."
+                  }
+                ],
+                "deliverable": "Identificación de los PIDs involucrados en el evento."
+              },
+              "terminal_sim": {
+                "initial_text": "Sysmon Telemetry Stream\nPrueba: 'analyze-sysmon-event'",
+                "commands": {
+                  "analyze-sysmon-event": "[SYSMON EVENT ID 8 DETECTED]:\nSourceImage: C:\\Users\\Public\\updater.exe (SHA256: 4b2f...)\nTargetImage: C:\\Windows\\System32\\explorer.exe\nStartAddress: 0x00007FF8B3910000\n[ALERTA EDR]: Inyección remota de proceso (T1055) identificada."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué Event ID de Sysmon registra la creación de hilos remotos en otros procesos (Process Injection)?",
+                  "options": [
+                    "Event ID 1",
+                    "Event ID 3",
+                    "Event ID 8",
+                    "Event ID 11"
+                  ],
+                  "correctIndex": 2,
+                  "explanation": "El Event ID 8 de Sysmon se activa específicamente cuando un proceso crea un hilo dentro del espacio de memoria de otro."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Telemetría Profunda en Windows con Sysmon",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Monitor de procesos de Sysmon rastreando inyecciones de DLLs en tiempo real.",
+                    "audio": "Si quieres ver lo que el antivirus no te cuenta, necesitas Sysmon. Hoy aprenderás a configurarlo como un profesional."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m3-5-dfir-forense",
+          "title": "Módulo 5: Digital Forensics & Incident Response (DFIR)",
+          "lessons": [
+            {
+              "id": "l3-9-metodologia-dfir",
+              "title": "3.9 Metodología de Respuesta a Incidentes (NIST SP 800-61 / SANS)",
+              "duration": "50 min",
+              "summary": "Aprende el ciclo de respuesta ante una brecha de seguridad: Preparación, Identificación, Contención, Erradicación, Recuperación y Lecciones Aprendidas.",
+              "theory": "### 1. Las 6 Fases de SANS / NIST\n1. **Preparación:** Políticas, herramientas y copias de seguridad inmutables.\n2. **Identificación (Detección):** Determinar el alcance, los sistemas afectados y los vectores de entrada.\n3. **Contención:** Aislar hosts afectados para frenar el movimiento lateral sin destruir evidencias volátiles.\n4. **Erradicación:** Eliminar malware, puertas traseras y credenciales comprometidas.\n5. **Recuperación:** Restaurar servicios de forma escalonada con monitorización reforzada.\n6. **Lecciones Aprendidas:** Informe post-mortem y mejora continua.",
+              "lab": {
+                "title": "Laboratorio: Simulación de Playbook de Contención de Endpoint Afectado",
+                "objective": "Aislar lógicamente un equipo comprometido de la red local preservando la conexión con la consola forense.",
+                "prerequisites": "PowerShell o terminal Linux.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Aislar la máquina bloqueando todo tráfico excepto la IP del SOC.",
+                    "command": "New-NetFirewallRule -DisplayName 'DFIR-Isolate' -Direction Outbound -Action Block",
+                    "explanation": "Evita la exfiltración de datos hacia el servidor C2 del atacante."
+                  }
+                ],
+                "deliverable": "Verificación del aislamiento de red del equipo comprometido."
+              },
+              "terminal_sim": {
+                "initial_text": "DFIR Incident Console\nPrueba: 'trigger-containment host-04'",
+                "commands": {
+                  "trigger-containment host-04": "[DFIR ACTION]: Aislando host-04 de la red corporativa...\n[+] Reglas de firewall de contención aplicadas.\n[+] Sesiones de red activas terminadas.\n[+] Conexión de triage forense con analista SOC preservada."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Por qué nunca se debe reiniciar o apagar de golpe un equipo infectado durante un incidente crítico?",
+                  "options": [
+                    "Se daña el monitor",
+                    "Se pierde toda la evidencia volátil de la memoria RAM (procesos maliciosos, claves de cifrado, conexiones activas)",
+                    "Se borra el disco duro",
+                    "El atacante toma control del BIOS"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "La memoria RAM contiene información volátil vital (artefactos de inyección, credenciales, conexiones) que desaparece al cortar la alimentación."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Gestión de Crisis: Las 6 Fases de la Respuesta a Incidentes",
+                "target_duration": "5 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Analistas del equipo de DFIR ejecutando un playbook de contención en tiempo real.",
+                    "audio": "Cuando la empresa está bajo ataque, no hay tiempo para improvisar. Hoy aprenderás el protocolo de respuesta a incidentes."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l3-10-forense-memoria",
+              "title": "3.10 Análisis Forense de Memoria Volátil con Volatility",
+              "duration": "50 min",
+              "summary": "Descubre cómo extraer artefactos ocultos, inyecciones de código y credenciales a partir de un volcado de memoria RAM (.raw / .dmp) con Volatility 3.",
+              "theory": "### 1. El valor forense de la memoria RAM\nEl malware moderno 'fileless' (sin archivo en disco) reside únicamente en la memoria RAM. **Volatility 3** permite inspeccionar la lista de procesos (`windows.pslist`), conexiones de red activas (`windows.netscan`) e inyecciones de memoria (`windows.malfind`).",
+              "lab": {
+                "title": "Laboratorio: Caza de Procesos Ocultos con Volatility 3",
+                "objective": "Identificar procesos con permisos sospechosos de ejecución en un volcado de memoria de prueba.",
+                "prerequisites": "Volatility 3 instalado y volcado de memoria.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Ejecutar el plugin de detección de inyecciones maliciosas.",
+                    "command": "python3 vol.py -f memory_dump.raw windows.malfind",
+                    "explanation": "Busca regiones de memoria con permisos PAGE_EXECUTE_READWRITE que contienen código shell inyectado."
+                  }
+                ],
+                "deliverable": "Listado de regiones de memoria sospechosas identificadas con Volatility."
+              },
+              "terminal_sim": {
+                "initial_text": "Volatility 3 CLI\nPrueba: 'vol3-malfind mem_sample.dmp'",
+                "commands": {
+                  "vol3-malfind mem_sample.dmp": "PID    Process      StartAddress       EndAddress         Protection\n4180   svchost.exe  0x0000018b2410000  0x0000018b241ffff  PAGE_EXECUTE_READWRITE\n[+] Cabecera MZ detectada en zona de memoria dinámica. Inyección de Cobalt Strike Beacon confirmada."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Qué plugin de Volatility 3 se utiliza comúnmente para detectar inyecciones de código y shellcodes en procesos?",
+                  "options": [
+                    "windows.filescan",
+                    "windows.malfind",
+                    "windows.registry",
+                    "windows.driverscan"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "windows.malfind localiza regiones de memoria con permisos de ejecución inusuales que indican inyección de código malicioso."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Análisis Forense de Memoria con Volatility",
+                "target_duration": "5 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Desensamblado de memoria RAM mostrando un payload inyectado en un proceso legítimo.",
+                    "audio": "El malware más avanzado no toca el disco: vive en la memoria RAM. Aprende a extraerlo con Volatility."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "m3-6-normativas-carrera",
+          "title": "Módulo 6: Cumplimiento, Ética y Carrera Profesional",
+          "lessons": [
+            {
+              "id": "l3-11-marcos-cumplimiento",
+              "title": "3.11 Marcos de Cumplimiento y Normativas (NIS2, ISO 27001, ENS)",
+              "duration": "40 min",
+              "summary": "Comprende los marcos regulatorios internacionales y europeos que rigen la seguridad de las organizaciones: directiva NIS2, RGPD, ISO 27001 y Esquema Nacional de Seguridad.",
+              "theory": "### 1. El auge regulatorio de la Ciberseguridad\nLa seguridad ya no es solo técnica: es una exigencia legal estricta con sanciones millonarias.\n* **Directiva NIS2 (UE):** Obliga a entidades esenciales e importantes a implementar gestión de riesgos, notificación de incidentes en menos de 24 horas y responsabilidad directa de los consejos de administración.\n* **ISO/IEC 27001:** Estándar internacional para Sistemas de Gestión de Seguridad de la Información (SGSI).\n* **ENS (Esquema Nacional de Seguridad):** Marco obligatorio en España para sector público y sus proveedores.",
+              "lab": {
+                "title": "Laboratorio: Auditoría de Controles ISO 27001 en una Infraestructura Cloud",
+                "objective": "Evaluar el cumplimiento de los controles de acceso y cifrado en base a la norma ISO 27001 Anexo A.",
+                "prerequisites": "Checklist de controles de seguridad.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Auditar si las bases de datos tienen habilitado el cifrado en reposo (At Rest).",
+                    "command": "Verificar controles A.8.24 (Uso de criptografía) y A.8.5 (Autenticación segura)",
+                    "explanation": "Permite emitir dictamen de conformidad para la auditoría de certificación."
+                  }
+                ],
+                "deliverable": "Informe de brecha (Gap Analysis) de 3 controles evaluados."
+              },
+              "terminal_sim": {
+                "initial_text": "Compliance Audit Tool\nPrueba: 'run-compliance-audit'",
+                "commands": {
+                  "run-compliance-audit": "[AUDITORÍA NIS2 / ISO 27001]:\n- Cifrado en tránsito (TLS 1.3): CUMPLE [OK]\n- Autenticación multifactor FIDO2: CUMPLE [OK]\n- Procedimiento de notificación en 24h: REQUIERE REVISIÓN [WARN]\n[ESTADO]: 85% de conformidad alcanzado."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál es uno de los plazos críticos fijados por la directiva europea NIS2 para la alerta temprana de un incidente significativo?",
+                  "options": [
+                    "1 año",
+                    "24 horas",
+                    "30 días",
+                    "6 meses"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "NIS2 estipula un plazo máximo de 24 horas para emitir una alerta temprana ante las autoridades competentes tras detectar un incidente significativo."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Lo que Todo Profesional Debe Saber sobre NIS2 e ISO 27001",
+                "target_duration": "4 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Infografía de las obligaciones y sanciones de la directiva NIS2.",
+                    "audio": "Las normativas ya no son un trámite burocrático: imponen multas millonarias y responsabilidades legales a directivos."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "l3-12-roadmap-certificaciones",
+              "title": "3.12 Hoja de Ruta de Certificaciones y Empleo en Ciberseguridad",
+              "duration": "45 min",
+              "summary": "Diseña tu plan de carrera profesional: descubre las certificaciones más demandadas (CompTIA Sec+, eJPT, OSCP, CISSP, GCTI) y cómo afrontar entrevistas técnicas de SOC.",
+              "theory": "### 1. El mapa de certificaciones de la industria\n* **Nivel Entrada / Fundamentos:** CompTIA Security+, Cisco CCST, Google Cybersecurity.\n* **Seguridad Ofensiva / Pentesting:** eJPT (eLearnSecurity), OSCP (OffSec Certified Professional), CPTS (HackTheBox).\n* **Seguridad Defensiva / Blue Team:** BTL1 (Blue Team Level 1), CompTIA CySA+, SC-200 (Microsoft SOC Analyst).\n* **Threat Intelligence & Forense:** GIAC GCTI (Cyber Threat Intelligence), GCFA (Certified Forensic Analyst).\n* **Gestión y Liderazgo:** CISSP (ISC2), CISM (ISACA).",
+              "lab": {
+                "title": "Laboratorio: Plan de Carrera Personalizado y Preparación de Portfolio",
+                "objective": "Construir tu portfolio técnico en GitHub y estructurar tu preparación para tu primera certificación oficial.",
+                "prerequisites": "Cuenta de GitHub y CV técnico.",
+                "steps": [
+                  {
+                    "step": 1,
+                    "instruction": "Crear un repositorio de Writeups y proyectos técnicos realizados durante el curso.",
+                    "command": "git init my-cyber-portfolio && git commit -m 'Initial security projects'",
+                    "explanation": "Tener proyectos y writeups demostrables en GitHub es el factor diferenciador en los procesos de selección técnica."
+                  }
+                ],
+                "deliverable": "Plan de estudio a 6 meses con fechas y metas de certificación."
+              },
+              "terminal_sim": {
+                "initial_text": "Cyber Career Roadmap Advisor\nPrueba: 'recommend-cert'",
+                "commands": {
+                  "recommend-cert": "[RECOMENDACIÓN DE RUTA PROFESIONAL]:\n1. Fundamentos: CompTIA Security+ (Meses 1-2)\n2. Especialización práctica: eJPT o BTL1 (Meses 3-4)\n3. Nivel Senior: OSCP o GIAC GCTI (Meses 5-8)\n[ESTADO DEL MERCADO]: Alta demanda de analistas de Threat Intelligence y DFIR."
+                }
+              },
+              "quiz": [
+                {
+                  "question": "¿Cuál de las siguientes certificaciones es reconocida mundialmente por su examen 100% práctico de 24 horas de intrusión ética?",
+                  "options": [
+                    "ITIL",
+                    "OSCP (OffSec Certified Professional)",
+                    "Scrum Master",
+                    "PMP"
+                  ],
+                  "correctIndex": 1,
+                  "explanation": "El OSCP de OffSec es el estándar de oro práctico donde el aspirante debe comprometer máquinas reales en un laboratorio de 24 horas."
+                }
+              ],
+              "video_script": {
+                "title": "Guion: Roadmap de Certificaciones para Triunfar en Ciberseguridad",
+                "target_duration": "5 Minutos",
+                "scenes": [
+                  {
+                    "time": "00:00 - 01:00",
+                    "visual": "Diagrama de carrera desde analista junior hasta CISO y especialista en CTI.",
+                    "audio": "¿Quieres trabajar en ciberseguridad pero no sabes qué certificación elegir? Hoy te muestro la hoja de ruta definitiva."
                   }
                 ]
               }
