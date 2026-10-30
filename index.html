@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberThreat Academy | Cursos de Ciberseguridad & Threat Intel</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Marked.js para renderizar Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              950: '#06090e',
+              900: '#0b131e',
+              800: '#142132',
+              700: '#1e334d',
+              accent: '#00f0ff',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              purple: '#8b5cf6'
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Estilos de scrollbar y terminal */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0b131e; }
+    ::-webkit-scrollbar-thumb { background: #1e334d; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+    
+    .markdown-content h2, .markdown-content h3 {
+      color: #f1f5f9;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid #1e334d;
+      padding-bottom: 0.35rem;
+    }
+    .markdown-content h3 { font-size: 1.2rem; border: none; }
+    .markdown-content p { color: #cbd5e1; margin-bottom: 1rem; line-height: 1.7; }
+    .markdown-content ul, .markdown-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
+    .markdown-content li { margin-bottom: 0.35rem; }
+    .markdown-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.9rem;
+    }
+    .markdown-content th {
+      background: #142132;
+      color: #38bdf8;
+      text-align: left;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #1e334d;
+    }
+    .markdown-content td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #1e334d;
+      color: #cbd5e1;
+    }
+    .markdown-content code {
+      background: #142132;
+      color: #38bdf8;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.88em;
+    }
+    .markdown-content pre {
+      background: #06090e;
+      border: 1px solid #1e334d;
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    .markdown-content blockquote {
+      border-left: 4px solid #00f0ff;
+      background: rgba(0, 240, 255, 0.05);
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+  </style>
+</head>
+<body class="bg-cyber-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- HEADER NAVEGACIÓN -->
+  <header class="border-b border-cyber-800 bg-cyber-900/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+          <i data-lucide="shield-alert" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-wide text-white flex items-center gap-2">
+            CyberThreat <span class="text-cyan-400 font-mono text-sm bg-cyan-950/60 border border-cyan-800 px-2 py-0.5 rounded">Academy</span>
+          </span>
+          <p class="text-xs text-slate-400">Plataforma Interactiva de Formación Técnica</p>
+        </div>
+      </div>
+
+      <!-- SELECTOR DE NIVELES -->
+      <div class="flex bg-cyber-950 p-1 rounded-xl border border-cyber-800 gap-1 text-sm font-medium" id="course-tabs">
+        <!-- Renderizado por JS -->
+      </div>
+
+      <!-- ESTADÍSTICAS / ACCIONES -->
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyber-800/60 border border-cyber-700/50 text-xs">
+          <i data-lucide="award" class="w-4 h-4 text-emerald-400"></i>
+          <span class="text-slate-300">Progreso:</span>
+          <span id="progress-percent" class="font-mono text-emerald-400 font-bold">0%</span>
+        </div>
+        <button onclick="toggleVideoExportModal()" class="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 text-xs font-semibold flex items-center gap-2 transition">
+          <i data-lucide="video" class="w-4 h-4"></i>
+          <span class="hidden md:inline">Generar Vídeo</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CUERPO PRINCIPAL -->
+  <div class="flex-1 max-w-7xl w-full mx-auto flex flex-col md:flex-row overflow-hidden">
+    
+    <!-- SIDEBAR: LISTA DE MÓDULOS Y LECCIONES -->
+    <aside class="w-full md:w-80 lg:w-96 border-r border-cyber-800 bg-cyber-900/50 flex flex-col overflow-y-auto max-h-[calc(100vh-4rem)]">
+      <div class="p-4 border-b border-cyber-800">
+        <div class="flex items-center justify-between mb-2">
+          <span id="course-sidebar-level" class="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800"></span>
+          <span id="course-sidebar-duration" class="text-xs text-slate-400 flex items-center gap-1 font-mono">
+            <i data-lucide="clock" class="w-3.5 h-3.5"></i> --h
+          </span>
+        </div>
+        <h2 id="course-sidebar-title" class="font-bold text-slate-100 text-sm leading-snug"></h2>
+      </div>
+
+      <!-- LISTA DE LECCIONES -->
+      <div class="p-3 space-y-4 flex-1" id="lessons-nav">
+        <!-- Renderizado dinámico -->
+      </div>
+    </aside>
+
+    <!-- ÁREA CENTRAL DE CONTENIDO -->
+    <main class="flex-1 flex flex-col overflow-y-auto max-h-[calc(100vh-4rem)] bg-cyber-950 p-4 sm:p-6 lg:p-8">
+      
+      <!-- CABECERA DE LECCIÓN -->
+      <div class="border-b border-cyber-800 pb-5 mb-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+          <div class="flex items-center gap-2 text-xs font-mono text-cyan-400">
+            <span id="lesson-module-tag">Módulo 1</span>
+            <span>•</span>
+            <span id="lesson-duration-tag">25 min</span>
+          </div>
+          <button id="btn-toggle-complete" onclick="toggleCurrentLessonComplete()" class="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-cyber-700 bg-cyber-900 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 transition">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span id="complete-btn-text">Marcar como completada</span>
+          </button>
+        </div>
+        <h1 id="lesson-title" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2"></h1>
+        <p id="lesson-summary" class="text-sm text-slate-400 max-w-3xl leading-relaxed"></p>
+
+        <!-- PESTAÑAS DE CONTENIDO: TEORÍA / LAB / TERMINAL / QUIZ / GUION -->
+        <div class="flex flex-wrap gap-2 mt-6 border-b border-cyber-800 -mb-5 pb-0">
+          <button onclick="switchView('theory')" id="tab-btn-theory" class="tab-button active px-4 py-2 text-sm font-medium border-b-2 border-cyan-400 text-cyan-400 flex items-center gap-2">
+            <i data-lucide="book-open" class="w-4 h-4"></i> Teoría & Conceptos
+          </button>
+          <button onclick="switchView('lab')" id="tab-btn-lab" class="tab-button px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2">
+            <i data-lucide="flask-conical" class="w-4 h-4"></i> Laboratorio Práctico
+          </button>
+          <button onclick="switchView('terminal')" id="tab-btn-terminal" class="tab-button px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2">
+            <i data-lucide="terminal" class="w-4 h-4"></i> Consola Interactiva
+          </button>
+          <button onclick="switchView('quiz')" id="tab-btn-quiz" class="tab-button px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2">
+            <i data-lucide="help-circle" class="w-4 h-4"></i> Test / Evaluación
+          </button>
+          <button onclick="switchView('video')" id="tab-btn-video" class="tab-button px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2">
+            <i data-lucide="clapperboard" class="w-4 h-4"></i> Guion de Vídeo
+          </button>
+        </div>
+      </div>
+
+      <!-- VISTA 1: TEORÍA -->
+      <div id="view-theory" class="view-panel block space-y-6">
+        <div id="theory-content" class="markdown-content max-w-4xl">
+          <!-- Inyectado por JS -->
+        </div>
+        <div class="pt-6 border-t border-cyber-800 flex justify-between items-center">
+          <button onclick="switchView('lab')" class="px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium text-sm flex items-center gap-2 shadow-lg shadow-cyan-950 transition">
+            <span>Ir al Laboratorio Práctico</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- VISTA 2: LABORATORIO GUIADO -->
+      <div id="view-lab" class="view-panel hidden space-y-6 max-w-4xl">
+        <div class="bg-cyber-900 border border-cyber-800 rounded-xl p-5 shadow-lg">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="p-2 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <i data-lucide="flask-conical" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 id="lab-title" class="font-bold text-lg text-white"></h3>
+              <p id="lab-objective" class="text-xs text-slate-400"></p>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cyber-800/80 flex items-center gap-2 text-xs text-slate-400">
+            <span class="font-semibold text-slate-300">Requisitos previos:</span>
+            <span id="lab-prerequisites"></span>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="font-bold text-white text-base flex items-center gap-2">
+            <i data-lucide="list-ordered" class="w-5 h-5 text-cyan-400"></i> Pasos de Ejecución
+          </h4>
+          <div id="lab-steps-list" class="space-y-4">
+            <!-- Inyectado por JS -->
+          </div>
+        </div>
+
+        <div class="bg-emerald-950/30 border border-emerald-900/50 rounded-xl p-4 flex items-start gap-3">
+          <i data-lucide="check-square" class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"></i>
+          <div>
+            <h5 class="text-sm font-bold text-emerald-300">Entregable / Resultado Esperado</h5>
+            <p id="lab-deliverable" class="text-xs text-slate-300 mt-1"></p>
+          </div>
+        </div>
+
+        <div class="flex gap-3">
+          <button onclick="switchView('terminal')" class="px-4 py-2 rounded-lg bg-cyber-800 hover:bg-cyber-700 text-cyan-300 font-medium text-sm flex items-center gap-2 transition">
+            <i data-lucide="terminal" class="w-4 h-4"></i>
+            <span>Abrir Simulador de Consola</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- VISTA 3: SIMULADOR DE CONSOLA / TERMINAL -->
+      <div id="view-terminal" class="view-panel hidden space-y-4 max-w-4xl">
+        <div class="bg-black border border-cyber-700 rounded-xl overflow-hidden shadow-2xl font-mono text-xs sm:text-sm">
+          <div class="bg-cyber-900 border-b border-cyber-800 px-4 py-2.5 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+              <span class="text-slate-400 text-xs ml-2">cyber-terminal ~ user@threat-lab</span>
+            </div>
+            <button onclick="clearTerminal()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Limpiar
+            </button>
+          </div>
+          <div id="terminal-screen" class="p-4 h-80 overflow-y-auto space-y-2 text-slate-300 bg-cyber-950/90 whitespace-pre-wrap leading-relaxed">
+            <!-- Salida de terminal -->
+          </div>
+          <form id="terminal-form" onsubmit="handleTerminalSubmit(event)" class="border-t border-cyber-800 flex items-center px-4 py-2 bg-cyber-900/90">
+            <span class="text-emerald-400 mr-2 font-bold">user@lab:~$</span>
+            <input type="text" id="terminal-input" autocomplete="off" placeholder="Escribe un comando o 'help'..." class="flex-1 bg-transparent text-white outline-none font-mono">
+            <button type="submit" class="px-3 py-1 bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 rounded text-xs hover:bg-cyan-600/50">Ejecutar</button>
+          </form>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-400">
+          <span class="font-bold text-slate-300">Atajos rápidos de prueba:</span>
+          <div id="terminal-quick-buttons" class="flex flex-wrap gap-1.5">
+            <!-- Inyectado por JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VISTA 4: QUIZ DE EVALUACIÓN -->
+      <div id="view-quiz" class="view-panel hidden space-y-6 max-w-3xl">
+        <div class="bg-cyber-900 border border-cyber-800 rounded-xl p-5">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-lg text-white flex items-center gap-2">
+              <i data-lucide="help-circle" class="w-5 h-5 text-cyan-400"></i> Evaluación de Conocimientos
+            </h3>
+            <span id="quiz-score-badge" class="px-2.5 py-1 rounded bg-cyber-800 text-xs font-mono text-slate-300">0 Preguntas</span>
+          </div>
+          <p class="text-xs text-slate-400">Responde a las preguntas para validar tu comprensión antes de avanzar al siguiente módulo.</p>
+        </div>
+
+        <div id="quiz-container" class="space-y-6">
+          <!-- Preguntas renderizadas por JS -->
+        </div>
+      </div>
+
+      <!-- VISTA 5: GUION MULTIMEDIA / VÍDEO -->
+      <div id="view-video" class="view-panel hidden space-y-6 max-w-4xl">
+        <div class="bg-gradient-to-r from-cyan-950/40 to-cyber-900 border border-cyan-800/40 rounded-xl p-5">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold">Formato YouTube / Udemy</span>
+              <h3 id="video-script-title" class="font-bold text-xl text-white mt-1"></h3>
+              <p class="text-xs text-slate-400 mt-1">Duración estimada: <span id="video-target-duration" class="font-mono text-cyan-300 font-bold"></span></p>
+            </div>
+            <button onclick="copyFullScript()" class="px-3.5 py-2 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold flex items-center gap-2 transition">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Guion Completo
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider font-mono">Secuencia de Escenas y Locución</h4>
+          <div id="video-scenes-list" class="space-y-3">
+            <!-- Inyectado por JS -->
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- CARGA DE DATOS Y LÓGICA -->
+  <script src="data/cursos.js"></script>
+  <script>
+    // Estado de la aplicación
+    let currentCourseIndex = 0;
+    let currentModuleIndex = 0;
+    let currentLessonIndex = 0;
+    let completedLessons = JSON.parse(localStorage.getItem('cyber_completed_lessons') || '[]');
+
+    function initAcademy() {
+      if (!window.ACADEMY_DATA || !window.ACADEMY_DATA.courses) {
+        console.error("No se pudo cargar la base de datos de cursos.");
+        return;
+      }
+      renderCourseTabs();
+      loadCourse(0);
+      lucide.createIcons();
+    }
+
+    // Renderizar botones de nivel en la cabecera
+    function renderCourseTabs() {
+      const container = document.getElementById('course-tabs');
+      container.innerHTML = '';
+      window.ACADEMY_DATA.courses.forEach((course, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `px-3 py-1.5 rounded-lg transition text-xs font-semibold ${
+          idx === currentCourseIndex ? 'bg-cyan-500 text-slate-950 font-bold shadow-md' : 'text-slate-400 hover:text-white'
+        }`;
+        btn.textContent = course.level;
+        btn.onclick = () => loadCourse(idx);
+        container.appendChild(btn);
+      });
+    }
+
+    // Cargar un curso específico
+    function loadCourse(index) {
+      currentCourseIndex = index;
+      currentModuleIndex = 0;
+      currentLessonIndex = 0;
+      renderCourseTabs();
+
+      const course = window.ACADEMY_DATA.courses[currentCourseIndex];
+      document.getElementById('course-sidebar-level').textContent = course.level;
+      document.getElementById('course-sidebar-duration').innerHTML = `<i data-lucide="clock" class="w-3.5 h-3.5"></i> ${course.duration}`;
+      document.getElementById('course-sidebar-title').textContent = course.title;
+
+      renderSidebarLessons();
+      loadLesson(0, 0);
+      updateOverallProgress();
+      lucide.createIcons();
+    }
+
+    // Renderizar la lista de módulos y lecciones en la barra lateral
+    function renderSidebarLessons() {
+      const container = document.getElementById('lessons-nav');
+      container.innerHTML = '';
+      const course = window.ACADEMY_DATA.courses[currentCourseIndex];
+
+      course.modules.forEach((mod, mIdx) => {
+        const modBox = document.createElement('div');
+        modBox.className = 'space-y-1.5';
+        
+        const modTitle = document.createElement('h3');
+        modTitle.className = 'text-xs font-mono font-bold text-slate-400 uppercase tracking-wider px-2 py-1';
+        modTitle.textContent = mod.title;
+        modBox.appendChild(modTitle);
+
+        const list = document.createElement('div');
+        list.className = 'space-y-1';
+
+        mod.lessons.forEach((les, lIdx) => {
+          const isCurrent = (mIdx === currentModuleIndex && lIdx === currentLessonIndex);
+          const isDone = completedLessons.includes(les.id);
+
+          const item = document.createElement('div');
+          item.className = `p-2.5 rounded-lg text-xs font-medium cursor-pointer transition flex items-center justify-between ${
+            isCurrent ? 'bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-bold' : 'hover:bg-cyber-800/80 text-slate-300'
+          }`;
+          item.onclick = () => loadLesson(mIdx, lIdx);
+
+          const left = document.createElement('div');
+          left.className = 'flex items-center gap-2.5 truncate';
+          left.innerHTML = `
+            <i data-lucide="${isDone ? 'check-circle-2' : 'circle'}" class="w-4 h-4 ${isDone ? 'text-emerald-400' : 'text-slate-600'} flex-shrink-0"></i>
+            <span class="truncate">${les.title}</span>
+          `;
+
+          const right = document.createElement('span');
+          right.className = 'text-[10px] font-mono text-slate-500 flex-shrink-0';
+          right.textContent = les.duration;
+
+          item.appendChild(left);
+          item.appendChild(right);
+          list.appendChild(item);
+        });
+
+        modBox.appendChild(list);
+        container.appendChild(modBox);
+      });
+    }
+
+    // Cargar contenido de la lección seleccionada
+    function loadLesson(mIdx, lIdx) {
+      currentModuleIndex = mIdx;
+      currentLessonIndex = lIdx;
+      const lesson = window.ACADEMY_DATA.courses[currentCourseIndex].modules[mIdx].lessons[lIdx];
+
+      // Cabecera
+      document.getElementById('lesson-module-tag').textContent = `Módulo ${mIdx + 1}`;
+      document.getElementById('lesson-duration-tag').textContent = lesson.duration;
+      document.getElementById('lesson-title').textContent = lesson.title;
+      document.getElementById('lesson-summary').textContent = lesson.summary;
+
+      // Estado de completado
+      updateCompleteButtonState(lesson.id);
+
+      // 1. Render Teoría (Markdown)
+      document.getElementById('theory-content').innerHTML = marked.parse(lesson.theory);
+
+      // 2. Render Laboratorio
+      if (lesson.lab) {
+        document.getElementById('lab-title').textContent = lesson.lab.title;
+        document.getElementById('lab-objective').textContent = lesson.lab.objective;
+        document.getElementById('lab-prerequisites').textContent = lesson.lab.prerequisites;
+        document.getElementById('lab-deliverable').textContent = lesson.lab.deliverable;
+
+        const stepsList = document.getElementById('lab-steps-list');
+        stepsList.innerHTML = '';
+        lesson.lab.steps.forEach(st => {
+          const card = document.createElement('div');
+          card.className = 'bg-cyber-900/70 border border-cyber-800 rounded-lg p-4 space-y-2';
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-cyan-400">Paso ${st.step}</span>
+              <button onclick="copyToClipboard('${st.command.replace(/'/g, "\\'")}')" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 font-mono">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar
+              </button>
+            </div>
+            <p class="text-xs font-semibold text-slate-200">${st.instruction}</p>
+            <div class="bg-black/80 rounded p-2.5 font-mono text-xs text-emerald-400 overflow-x-auto border border-cyber-800">
+              <code>${st.command}</code>
+            </div>
+            <p class="text-[11px] text-slate-400 italic">${st.explanation}</p>
+          `;
+          stepsList.appendChild(card);
+        });
+      }
+
+      // 3. Render Consola / Terminal Simulator
+      setupTerminalForLesson(lesson);
+
+      // 4. Render Quiz
+      renderQuizForLesson(lesson);
+
+      // 5. Render Guion de Vídeo
+      renderVideoScriptForLesson(lesson);
+
+      // Actualizar sidebar visualmente
+      renderSidebarLessons();
+      lucide.createIcons();
+    }
+
+    // Configurar simulador de terminal
+    function setupTerminalForLesson(lesson) {
+      const screen = document.getElementById('terminal-screen');
+      screen.textContent = lesson.terminal_sim?.initial_text || "CyberTerminal v1.0 listo. Escribe 'help'.";
+
+      const quickBtnContainer = document.getElementById('terminal-quick-buttons');
+      quickBtnContainer.innerHTML = '';
+      if (lesson.terminal_sim?.commands) {
+        Object.keys(lesson.terminal_sim.commands).forEach(cmd => {
+          const btn = document.createElement('button');
+          btn.className = 'px-2 py-1 rounded bg-cyber-800 hover:bg-cyber-700 text-cyan-300 font-mono text-[11px] border border-cyber-700 transition';
+          btn.textContent = cmd;
+          btn.onclick = () => runTerminalCommand(cmd);
+          quickBtnContainer.appendChild(btn);
+        });
+      }
+    }
+
+    function runTerminalCommand(cmd) {
+      const screen = document.getElementById('terminal-screen');
+      const lesson = window.ACADEMY_DATA.courses[currentCourseIndex].modules[currentModuleIndex].lessons[currentLessonIndex];
+      screen.textContent += `\n\nuser@lab:~$ ${cmd}\n`;
+
+      if (cmd.toLowerCase() === 'help') {
+        const available = lesson.terminal_sim?.commands ? Object.keys(lesson.terminal_sim.commands).join(', ') : 'No hay comandos simulados';
+        screen.textContent += `[Comandos disponibles]: ${available}, clear, help`;
+      } else if (cmd.toLowerCase() === 'clear') {
+        screen.textContent = '';
+      } else if (lesson.terminal_sim?.commands && lesson.terminal_sim.commands[cmd]) {
+        screen.textContent += lesson.terminal_sim.commands[cmd];
+      } else {
+        screen.textContent += `bash: ${cmd}: orden no encontrada. Escribe 'help' para comandos válidos.`;
+      }
+      screen.scrollTop = screen.scrollHeight;
+    }
+
+    function handleTerminalSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('terminal-input');
+      const val = input.value.trim();
+      if (val) {
+        runTerminalCommand(val);
+        input.value = '';
+      }
+    }
+
+    function clearTerminal() {
+      document.getElementById('terminal-screen').textContent = 'CyberLab v1.0 - Terminal limpia.\n';
+    }
+
+    // Render Quiz
+    function renderQuizForLesson(lesson) {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '';
+      const questions = lesson.quiz || [];
+      document.getElementById('quiz-score-badge').textContent = `${questions.length} Pregunta(s)`;
+
+      questions.forEach((q, qIdx) => {
+        const qCard = document.createElement('div');
+        qCard.className = 'bg-cyber-900 border border-cyber-800 rounded-xl p-5 space-y-3';
+        
+        const qTitle = document.createElement('h4');
+        qTitle.className = 'font-semibold text-white text-sm';
+        qTitle.textContent = `${qIdx + 1}. ${q.question}`;
+        qCard.appendChild(qTitle);
+
+        const optsList = document.createElement('div');
+        optsList.className = 'space-y-2';
+
+        const feedback = document.createElement('div');
+        feedback.className = 'hidden text-xs p-3 rounded-lg mt-3 leading-relaxed';
+
+        q.options.forEach((opt, oIdx) => {
+          const btnOpt = document.createElement('button');
+          btnOpt.className = 'w-full text-left px-4 py-2.5 rounded-lg border border-cyber-800 bg-cyber-950/60 hover:bg-cyber-800/80 text-xs text-slate-300 transition flex items-center justify-between';
+          btnOpt.innerHTML = `<span>${opt}</span>`;
+          btnOpt.onclick = () => {
+            // Verificar respuesta
+            if (oIdx === q.correctIndex) {
+              btnOpt.className = 'w-full text-left px-4 py-2.5 rounded-lg border border-emerald-500 bg-emerald-950/40 text-emerald-300 text-xs font-semibold';
+              feedback.className = 'block text-xs p-3 rounded-lg mt-3 bg-emerald-950/50 border border-emerald-800 text-emerald-200';
+              feedback.innerHTML = `<strong>¡Correcto!</strong> ${q.explanation}`;
+            } else {
+              btnOpt.className = 'w-full text-left px-4 py-2.5 rounded-lg border border-red-500 bg-red-950/40 text-red-300 text-xs';
+              feedback.className = 'block text-xs p-3 rounded-lg mt-3 bg-red-950/50 border border-red-800 text-red-200';
+              feedback.innerHTML = `<strong>Incorrecto.</strong> ${q.explanation}`;
+            }
+          };
+          optsList.appendChild(btnOpt);
+        });
+
+        qCard.appendChild(optsList);
+        qCard.appendChild(feedback);
+        container.appendChild(qCard);
+      });
+    }
+
+    // Render Vídeo
+    function renderVideoScriptForLesson(lesson) {
+      if (!lesson.video_script) return;
+      document.getElementById('video-script-title').textContent = lesson.video_script.title;
+      document.getElementById('video-target-duration').textContent = lesson.video_script.target_duration;
+
+      const scenesList = document.getElementById('video-scenes-list');
+      scenesList.innerHTML = '';
+
+      lesson.video_script.scenes.forEach((sc, idx) => {
+        const item = document.createElement('div');
+        item.className = 'bg-cyber-900 border border-cyber-800 rounded-lg p-4 space-y-2';
+        item.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-cyan-400">Escena ${idx + 1} (${sc.time})</span>
+            <span class="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Visual + Audio</span>
+          </div>
+          <div class="text-xs text-amber-300/90 font-mono bg-cyber-950 p-2 rounded border border-cyber-800">
+            <strong>🎬 Visual:</strong> ${sc.visual}
+          </div>
+          <div class="text-xs text-slate-200 leading-relaxed pl-1 border-l-2 border-cyan-500/50">
+            <strong>🎙️ Locución:</strong> "${sc.audio}"
+          </div>
+        `;
+        scenesList.appendChild(item);
+      });
+    }
+
+    // Cambiar pestañas de la lección
+    function switchView(viewName) {
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active', 'border-cyan-400', 'text-cyan-400');
+        btn.classList.add('border-transparent', 'text-slate-400');
+      });
+
+      document.getElementById(`view-${viewName}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${viewName}`);
+      activeBtn.classList.add('active', 'border-cyan-400', 'text-cyan-400');
+      activeBtn.classList.remove('border-transparent', 'text-slate-400');
+    }
+
+    // Marcar lección como completada
+    function toggleCurrentLessonComplete() {
+      const lesson = window.ACADEMY_DATA.courses[currentCourseIndex].modules[currentModuleIndex].lessons[currentLessonIndex];
+      const idx = completedLessons.indexOf(lesson.id);
+      if (idx > -1) {
+        completedLessons.splice(idx, 1);
+      } else {
+        completedLessons.push(lesson.id);
+      }
+      localStorage.setItem('cyber_completed_lessons', JSON.stringify(completedLessons));
+      updateCompleteButtonState(lesson.id);
+      renderSidebarLessons();
+      updateOverallProgress();
+      lucide.createIcons();
+    }
+
+    function updateCompleteButtonState(lessonId) {
+      const isDone = completedLessons.includes(lessonId);
+      const btn = document.getElementById('btn-toggle-complete');
+      const text = document.getElementById('complete-btn-text');
+      if (isDone) {
+        btn.className = 'flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-emerald-500 bg-emerald-950/60 text-emerald-400 transition';
+        text.textContent = 'Completada ✓';
+      } else {
+        btn.className = 'flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-cyber-700 bg-cyber-900 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 transition';
+        text.textContent = 'Marcar como completada';
+      }
+    }
+
+    function updateOverallProgress() {
+      let total = 0;
+      window.ACADEMY_DATA.courses.forEach(c => {
+        c.modules.forEach(m => total += m.lessons.length);
+      });
+      const percent = total > 0 ? Math.round((completedLessons.length / total) * 100) : 0;
+      document.getElementById('progress-percent').textContent = `${percent}%`;
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      alert('¡Comando copiado al portapapeles!');
+    }
+
+    function copyFullScript() {
+      const lesson = window.ACADEMY_DATA.courses[currentCourseIndex].modules[currentModuleIndex].lessons[currentLessonIndex];
+      if (!lesson.video_script) return;
+      let full = `# ${lesson.video_script.title}\nDuración: ${lesson.video_script.target_duration}\n\n`;
+      lesson.video_script.scenes.forEach((sc, i) => {
+        full += `## Escena ${i+1} [${sc.time}]\nVISUAL: ${sc.visual}\nLOCUCIÓN: ${sc.audio}\n\n`;
+      });
+      navigator.clipboard.writeText(full);
+      alert('¡Guion completo copiado al portapapeles!');
+    }
+
+    function toggleVideoExportModal() {
+      alert("Integración lista: Puedes conectar estos guiones directamente con tu pipeline local de Remotion/ElevenLabs para compilar los vídeos automáticamente.");
+    }
+
+    // Inicializar al cargar el DOM
+    document.addEventListener('DOMContentLoaded', initAcademy);
+  </script>
+</body>
+</html>
